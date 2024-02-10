@@ -1,0 +1,14 @@
+.form__messages{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.chat__container{
+    max-width: 500px;
+    
+}
+
+.btn{
+    margin-top: 20px;
+}

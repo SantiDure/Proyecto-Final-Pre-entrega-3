@@ -1,0 +1,10 @@
+.formCreateProduct{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 10px;
+}
+
+.volver{
+    margin: 30px;
+}

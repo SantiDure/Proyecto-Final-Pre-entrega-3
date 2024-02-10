@@ -1,0 +1,11 @@
+{{#if productsInCart}} 
+<ul>  
+    <h1>TU CARRITO:</h1>
+  {{#each products}}
+  <li>{{products}}</li>
+
+  {{/each}}
+</ul>
+{{else}}
+nada para mostrar...<br>
+{{/if}}

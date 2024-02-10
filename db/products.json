@@ -1,0 +1,15 @@
+[
+  {
+    "id": "40caa228-679b-4eac-889a-ff51fbeac9a4",
+    "title": "Camiseta de futbol",
+    "description": "Camiseta del ultimo equipo campeon",
+    "code": "53fgyr",
+    "price": 56,
+    "status": true,
+    "stock": 30,
+    "category": "Ropa deportiva PREMIUM",
+    "thumbnail": [
+      "camisetaimagen.com"
+    ]
+  }
+]

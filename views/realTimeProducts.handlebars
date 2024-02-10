@@ -1,0 +1,48 @@
+<h1>CREA TU PRODUCTO!</h1>
+
+<form>
+  <div class="mb-3">
+    <label for="title" class="form_label">Titulo</label>
+    <input type="text" class="form_input" id="title">
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form_label">Descripcion</label>
+    <input type="text" class="form_input" id="description">
+  </div>
+  <div class="mb-3">
+    <label for="code" class="form_label">Codigo</label>
+    <input type="text" class="form_input" id="code">
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form_label">Precio en USD</label>
+    <input type="number" class="form_input" id="price">
+  </div>
+  <div class="mb-3">
+    <label for="stock" class="form_label">Stock</label>
+    <input type="number" class="form_input" id="stock">
+  </div>
+  <div class="mb-3">
+    <label for="category" class="form_label">Categoria</label>
+    <input type="text" class="form_input" id="category">
+  </div>
+  <div class="mb-3">
+    <label for="thumbnail" class="form_label">URL imagen</label>
+    <input type="text" class="form_input" id="thumbnail">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Crear producto</button>
+</form>
+
+<div class="listaProductos">
+
+  </div>
+<a href="/"><button class="btn btn-primary">volver</button></a>
+<script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js
+"></script>
+<link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
+" rel="stylesheet">
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/index.handlebars.js"></script>
+<script src="/static/js/realTimeProducts.client.js"></script>

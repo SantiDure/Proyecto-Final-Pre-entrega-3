@@ -1,0 +1,35 @@
+<div class="products__container">
+  <h1>Bienvenido {{first_name}} {{last_name}}</h1>
+  <h2 id="id-carrito">{{cart._id}}</h2>
+<div class="product__cards">
+{{#if hayDocs}}
+  {{#each docs}}
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+
+  <p class="card-title"><b>{{title}}</b></p>
+  <p class="card-text">Stock: {{stock}}</p>
+  <p class="card-text">{{description}}</p>
+
+  {{!-- <p class="card-text">ID PRODUCTO: {{_id}}</p> --}}
+<button class="btn btn-primary" onclick='agregarAlCarrito("{{_id}}")'>Agregar al carrito</button>
+
+
+
+    </div>
+  </div>
+  {{/each}}
+
+{{else}}
+nada para mostrar...<br>
+{{/if}}
+
+
+</div>
+<a {{#if hasPrevPage}} href="/products?limit={{limit}}&page={{prevPage}}" {{/if}}>Prev</a>
+[{{ page }}]
+<a {{#if hasNextPage}} href="/products?limit={{limit}}&page={{nextPage}}" {{/if}}>Next</a><br>
+Página: <input type="text"> <button onclick="irAPag({{limit}})">ir</button>
+</div>
+<link rel="stylesheet" href="../static/css/products.css">
+<script src="../static/js/products.client.js"></script>

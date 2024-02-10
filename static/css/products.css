@@ -1,0 +1,19 @@
+.products__container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.product__cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card{
+    margin: 15px;
+}
+#id-carrito{
+    display: none;
+}
