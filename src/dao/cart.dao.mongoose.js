@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import { randomUUID } from "node:crypto";
 import { productService } from "../services/index.js";
+import { ErrorType, newError } from "../errors/errors.js";
 const cartSchema = new Schema(
   {
     _id: { type: String, default: randomUUID },
@@ -64,7 +65,10 @@ const cartSchema = new Schema(
 
             return cart;
           } else {
-            throw new Error("Producto no encontrado en el carrito");
+            throw newError(
+              ErrorType.NOT_FOUND,
+              "producto no encontrado en el carrito"
+            );
           }
         } catch (error) {
           console.log(error);

@@ -1,3 +1,5 @@
+import { ErrorType, newError } from "../../src/errors/errors";
+
 function irAPag(limit) {
   const pagDeseada = document.querySelector("input").value || 1;
   window.location = `/products?limit=${limit}&page=${pagDeseada}`;
@@ -14,7 +16,7 @@ async function agregarAlCarrito(productoId) {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Error al agregar al carrito");
+          throw newError(ErrorType.NOT_FOUND, "Error al agregar al carrito");
         } else {
           return response.json();
         }

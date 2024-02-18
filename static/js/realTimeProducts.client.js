@@ -1,3 +1,5 @@
+import { ErrorType, newError } from "../../src/errors/errors";
+
 const form = document.querySelector("form");
 const productList = document.querySelector(".listaProductos");
 
@@ -54,7 +56,10 @@ socket.on("getProducts", async () => {
     const response = await fetch("/api/products");
 
     if (!response.ok) {
-      throw new Error(`Error al obtener productos: ${response.status}`);
+      throw newError(
+        ErrorType.NOT_FOUND,
+        `Error al obtener productos: ${response.status}`
+      );
     }
 
     const products = await response.json();

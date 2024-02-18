@@ -3,6 +3,7 @@ import { randomUUID } from "node:crypto";
 import { hashCompare } from "../utils/criptograph.js";
 import { generateUniqueUsername } from "../utils/randomUserName.js";
 import { cartService } from "../services/index.js";
+import { newError, ErrorType } from "../errors/errors.js";
 const collection = "users";
 const userSchema = new mongoose.Schema(
   {
@@ -36,11 +37,11 @@ const userSchema = new mongoose.Schema(
             .lean();
 
           if (!user) {
-            throw new Error("login failed");
+            throw newError(ErrorType.BAD_REQUEST, "login failed");
           }
 
           if (!hashCompare(password, user["password"])) {
-            throw new Error("login failed");
+            throw newError(ErrorType.UNAUTHORIZED, "login failed");
           }
 
           datosUsuario = {
