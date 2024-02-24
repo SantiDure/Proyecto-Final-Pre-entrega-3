@@ -13,6 +13,7 @@ import {
 } from "./middlewares/autenticaciones.js";
 import cookieParser from "cookie-parser";
 import { messagesDaoMongoose } from "./dao/message.dao.mongoose.js";
+import { logger } from "./utils/logger.js";
 
 /////////////////////////////
 
@@ -22,6 +23,16 @@ await connectDb();
 //SERVER
 
 const app = express();
+
+app.get("/loggerTest", (req, res) => {
+  logger.debug("LOGGER TEST DEBUG");
+  logger.http("LOGGER TEST HTTP");
+  logger.info("LOGGER TEST INFO");
+  logger.warning("LOGGER TEST WARNING");
+  logger.error("LOGGER TEST ERROR");
+  logger.fatal("LOGGER TEST FATAL");
+  return;
+});
 app.use(cookieParser(COOKIE_SECRET));
 app.use(sesiones);
 app.use(passportInitialize, passportSession);
@@ -32,11 +43,11 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something went wrong!");
 });
-// console.log(process.env);
+// logger.info(process.env);
 app.use("/api", apiRouter);
 
 const server = app.listen(PORT, () =>
-  console.log(`servidor levantado en el puerto ${PORT}`)
+  logger.info(`servidor levantado en el puerto ${PORT}`)
 );
 
 /////////////////////////////
@@ -46,7 +57,7 @@ const websocketServer = new Server(server);
 app.use("/static", express.static("./static"));
 app.use("/", webRouter);
 websocketServer.on("connection", async (socket) => {
-  console.log(socket.id);
+  logger.info(socket.id);
   //getProducts
   socket.emit("getProducts", await productService.getProductsService({}));
 
@@ -70,7 +81,7 @@ websocketServer.on("connection", async (socket) => {
     }
   );
   socket.on("disconnecting", () => {
-    console.log(socket.id + " se fue");
+    logger.info(socket.id + " se fue");
   });
   //delete
   socket.on("deleteProduct", async (productID) => {

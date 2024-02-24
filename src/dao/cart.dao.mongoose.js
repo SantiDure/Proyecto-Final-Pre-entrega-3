@@ -2,6 +2,7 @@ import { Schema, model } from "mongoose";
 import { randomUUID } from "node:crypto";
 import { productService } from "../services/index.js";
 import { ErrorType, newError } from "../errors/errors.js";
+import { logger } from "../utils/logger.js";
 const cartSchema = new Schema(
   {
     _id: { type: String, default: randomUUID },
@@ -71,7 +72,7 @@ const cartSchema = new Schema(
             );
           }
         } catch (error) {
-          console.log(error);
+          logger.info(error);
         }
       },
       updateProductQuantityOnCart: async function (cid, pid) {},

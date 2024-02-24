@@ -1,5 +1,5 @@
 import { ErrorType } from "../errors/errors.js";
-
+import { logger } from "../utils/logger.js";
 export function errorHandler(error, req, res, next) {
   switch (error.name) {
     case ErrorType.BAD_REQUEST:
@@ -13,5 +13,6 @@ export function errorHandler(error, req, res, next) {
     default:
       res.status(500);
   }
+  logger.error(`status ${res.status} - message: ${error.message}`);
   res.json({ status: "error", message: error.message });
 }

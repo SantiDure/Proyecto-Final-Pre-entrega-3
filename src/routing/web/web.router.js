@@ -6,6 +6,7 @@ import {
 } from "../../middlewares/autorizaciones.js";
 import { productsManager } from "../../dao/product.dao.mongoose.js";
 import { cartService } from "../../services/index.js";
+import { logger } from "../../utils/logger.js";
 export const webRouter = Router();
 
 webRouter.get("/", (req, res) => {
@@ -81,7 +82,7 @@ webRouter.get(
     const { cid } = req.params;
     const result = await cartService.getCartByIdService({ _id: cid });
     let productList = result;
-    console.log(productList.products);
+    logger.info(productList.products);
     // result.products;
     res.render("cart.handlebars", {
       title: "cart",

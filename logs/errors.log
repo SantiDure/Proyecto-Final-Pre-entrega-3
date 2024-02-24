@@ -1,0 +1,15 @@
+{"level":"info","message":"DB conectada a mongodb+srv://SantiDure:Sd232702@cluster0.gb6sgd5.mongodb.net/ecommerce"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada a mongodb+srv://SantiDure:Sd232702@cluster0.gb6sgd5.mongodb.net/ecommerce"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"debug","message":"LOGGER TEST DEBUG"}
+{"level":"http","message":"LOGGER TEST HTTP"}
+{"level":"info","message":"LOGGER TEST INFO"}
+{"level":"warning","message":"LOGGER TEST WARNING"}
+{"level":"error","message":"LOGGER TEST ERROR"}
+{"level":"fatal","message":"LOGGER TEST FATAL"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":{"email":"admin","first_name":"admin","last_name":"admin","rol":"admin"}}

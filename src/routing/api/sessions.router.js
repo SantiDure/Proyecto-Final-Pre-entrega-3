@@ -2,6 +2,7 @@ import { Router } from "express";
 import passport from "passport";
 import { appendJwtAsCookie } from "../../middlewares/autenticaciones.js";
 import { userDTO } from "../../dto/user.dto.js";
+import { logger } from "../../utils/logger.js";
 export const sessionRouter = Router();
 
 sessionRouter.post(
@@ -12,7 +13,7 @@ sessionRouter.post(
   appendJwtAsCookie,
 
   async (req, res) => {
-    console.log(req.user),
+    logger.info(req.user),
       res.status(201).json({ status: "success", user: req.user });
   },
   (error, req, res, next) => {
