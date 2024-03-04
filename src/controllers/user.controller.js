@@ -57,7 +57,7 @@ export async function deleteUserController(req, res) {
 export async function changeRolUserAndPremiumController(req, res) {
   const { uid } = req.params;
   const user = await userService.getUserByIdService({ _id: uid });
-  console.log(user);
+
   try {
     if (user.rol === "user") {
       user.rol = "premium";

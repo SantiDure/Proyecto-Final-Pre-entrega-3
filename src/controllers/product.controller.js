@@ -43,8 +43,11 @@ export async function getProductControllerId(req, res) {
 
 export async function postProductController(req, res) {
   try {
-    await productService.createProductService(req.body);
-    res.json(req.body);
+    const product = await productService.createProductService(
+      req.body,
+      req.user.email
+    );
+    res.status(200).json(product);
   } catch (error) {
     res.status(400).send({ message: error.message });
   }

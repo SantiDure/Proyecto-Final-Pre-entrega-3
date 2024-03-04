@@ -66,3 +66,55 @@
 {"level":"info","message":"servidor levantado en el puerto 8080"}
 {"level":"info","message":"DB conectada"}
 {"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"error","message":"status function status(code) {\n  if ((typeof code === 'string' || Math.floor(code) !== code) && code > 99 && code < 1000) {\n    deprecate('res.status(' + JSON.stringify(code) + '): use res.status(' + Math.floor(code) + ') instead')\n  }\n  this.statusCode = code;\n  return this;\n} - message: Unauthorized"}
+{"level":"info","message":{"email":"admin","first_name":"admin","last_name":"admin","rol":"admin"}}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":{"email":"admin","first_name":"admin","last_name":"admin","rol":"admin"}}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":{"email":"admin","first_name":"admin","last_name":"admin","rol":"admin"}}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"error","message":"status function status(code) {\n  if ((typeof code === 'string' || Math.floor(code) !== code) && code > 99 && code < 1000) {\n    deprecate('res.status(' + JSON.stringify(code) + '): use res.status(' + Math.floor(code) + ') instead')\n  }\n  this.statusCode = code;\n  return this;\n} - message: Unauthorized"}
+{"level":"info","message":{"email":"admin","first_name":"admin","last_name":"admin","rol":"admin"}}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":{"age":0,"cart":{"_id":"76a88afc-3cd7-45cf-9fea-4d6b1a98ca13","products":[]},"email":"aa@aa.com","first_name":"creative_dog_870","last_name":"unknow","password":"$2b$10$UAUIPFX1zu3mFVItj2uDYOnmu7.699jiNqtg4gCp.h03xpdAydNWK","rol":"user"}}
+{"level":"error","message":"status function status(code) {\n  if ((typeof code === 'string' || Math.floor(code) !== code) && code > 99 && code < 1000) {\n    deprecate('res.status(' + JSON.stringify(code) + '): use res.status(' + Math.floor(code) + ') instead')\n  }\n  this.statusCode = code;\n  return this;\n} - message: Unauthorized"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
