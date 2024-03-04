@@ -53,3 +53,24 @@ export async function deleteUserController(req, res) {
     res.status(404).json({ status: "error", message: error.messaje });
   }
 }
+
+export async function changeRolUserAndPremiumController(req, res) {
+  const { uid } = req.params;
+  const user = await userService.getUserByIdService({ _id: uid });
+  console.log(user);
+  try {
+    if (user.rol === "user") {
+      user.rol = "premium";
+    } else if (user.rol === "premium") {
+      user.rol = "user";
+    }
+
+    const updated = await userService.updateOneService(uid, {
+      $set: { rol: user.rol },
+    });
+
+    return res.status(200).json({ status: "success", payload: updated });
+  } catch (error) {
+    res.status(404).json({ status: "error", message: error.message });
+  }
+}

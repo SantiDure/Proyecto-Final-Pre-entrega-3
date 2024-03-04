@@ -11,4 +11,5 @@ export const sesiones = session({
   secret: "secretDePrueba",
   resave: true,
   saveUninitialized: true,
+  cookie: { maxAge: 2 * 60 * 1000 },
 });

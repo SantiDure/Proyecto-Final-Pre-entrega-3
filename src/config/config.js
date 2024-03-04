@@ -5,7 +5,7 @@ export const PORT = Number(process.env.PORT);
 export const MONGODB_CNX_STR = process.env.MONGODB_CNX_STR;
 export const COOKIE_OPTS = {
   signed: true,
-  maxAge: 24 * 60 * 60 * 1000,
+  maxAge: 60_000,
   httpOnly: true,
 };
 export const GITHUB_APP_ID = Number(process.env.GITHUB_APP_ID);

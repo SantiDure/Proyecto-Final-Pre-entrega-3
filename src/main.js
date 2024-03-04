@@ -14,6 +14,7 @@ import {
 import cookieParser from "cookie-parser";
 import { messagesDaoMongoose } from "./dao/message.dao.mongoose.js";
 import { logger } from "./utils/logger.js";
+import { transport } from "./utils/nodemailer.js";
 
 /////////////////////////////
 
@@ -32,6 +33,23 @@ app.get("/loggerTest", (req, res) => {
   logger.error("LOGGER TEST ERROR");
   logger.fatal("LOGGER TEST FATAL");
   return;
+});
+app.get("/mail", async (req, res) => {
+  let result = await transport.sendMail({
+    from: "Santiago Duré - Desarrollador web <santidure2002@gmail.com>",
+    to: "santidure200@gmail.com",
+    subject: "reestablece tu contraseña",
+    html: `
+    <div>
+      
+        <h1>presiona el boton para iniciar el proceso de reestablecimiento</h1>
+        <a href='http://localhost:8080/resetpassword'>ir</a>
+      
+    </div>
+    `,
+    attachments: [],
+  });
+  res.send({ status: "success", result: "email sent" });
 });
 app.use(cookieParser(COOKIE_SECRET));
 app.use(sesiones);

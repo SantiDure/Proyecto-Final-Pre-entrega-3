@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
     last_name: { type: String, default: "unknow" },
     age: { type: Number, default: 0 },
     cart: { type: Object, required: true },
-    rol: { type: String, default: "user" },
+    rol: { type: String, enum: ["admin", "user", "premium"], default: "user" },
   },
   {
     strict: "throw",
@@ -76,9 +76,9 @@ export class UsersDaoMongoose {
   async readMany(query) {
     return await usersManager.find(query).lean();
   }
-  async updateOne(id, data) {
+  async updateOne(id, query) {
     return await usersManager
-      .findOneAndUpdate({ _id: id }, { $set: data }, { new: true })
+      .findOneAndUpdate({ _id: id }, query, { new: true })
       .lean();
   }
 

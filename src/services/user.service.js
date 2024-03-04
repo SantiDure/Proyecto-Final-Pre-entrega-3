@@ -11,13 +11,13 @@ export class UserRepository {
     return await this.dao.readMany({});
   }
 
-  async getUserByIdService(quey) {
-    const userForId = await this.dao.readOne(quey);
+  async getUserByIdService(query) {
+    const userForId = await this.dao.readOne(query);
     return userForId;
   }
 
-  async updateOneService(id, data) {
-    return this.dao.updateOne(id, data);
+  async updateOneService(id, query) {
+    return this.dao.updateOne(id, query);
   }
 
   async deleteOneService(id) {
