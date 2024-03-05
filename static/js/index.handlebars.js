@@ -2,7 +2,9 @@ async function getProducts() {
   const listaProductos = document.querySelector(".listaProductos");
   const response = await fetch("/api/products");
   const products = await response.json();
+
   if (products[0]) {
+    console.log(products.payload);
     listaProductos.innerHTML = "";
     products.map((product) => {
       let divProduct = document.createElement("div");
@@ -18,7 +20,7 @@ async function getProducts() {
     });
   } else {
     listaProductos.innerHTML = `
-  <div>NO HAY PRODUCTOS</div>`;
+  <div>NO HAY PROD</div>`;
   }
 }
 

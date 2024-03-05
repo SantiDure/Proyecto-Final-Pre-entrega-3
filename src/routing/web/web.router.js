@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-  onlyAdmin,
+  onlyAdminAndPremium,
   onlySessionActive,
   onlyUser,
 } from "../../middlewares/autorizaciones.js";
@@ -36,9 +36,14 @@ webRouter.get("/unauthorized", (req, res) => {
 webRouter.get("/index", onlySessionActive, (req, res) => {
   res.render("index.handlebars", { title: "PRUEBA" });
 });
-webRouter.get("/realtimeproducts", onlySessionActive, onlyAdmin, (req, res) => {
-  res.render("realTimeProducts.handlebars", { title: "REAL" });
-});
+webRouter.get(
+  "/realtimeproducts",
+  onlySessionActive,
+  onlyAdminAndPremium,
+  (req, res) => {
+    res.render("realTimeProducts.handlebars", { title: "REAL" });
+  }
+);
 webRouter.get("/chat", onlySessionActive, onlyUser, (req, res) => {
   res.render("chat.handlebars", { title: "CHAT" });
 });

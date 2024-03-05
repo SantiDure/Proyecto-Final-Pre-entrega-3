@@ -23,7 +23,7 @@ sessionRouter.post(
 
 sessionRouter.get(
   "/current",
-  passport.authenticate("jwt", { failWithError: true }),
+  // passport.authenticate("jwt", { failWithError: true }),
   function (req, res) {
     return res.json(new userDTO(req.user));
   }

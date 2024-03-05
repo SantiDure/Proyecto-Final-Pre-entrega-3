@@ -82,16 +82,22 @@ websocketServer.on("connection", async (socket) => {
   //add
   socket.on(
     "addProduct",
-    async ({ title, description, code, price, stock, category, thumbnail }) => {
-      await productService.createProductService({
-        title,
-        description,
-        code,
-        price,
-        stock,
-        category,
-        thumbnail,
-      });
+    async (
+      { title, description, code, price, stock, category, thumbnail },
+      ownerId
+    ) => {
+      await productService.createProductService(
+        {
+          title,
+          description,
+          code,
+          price,
+          stock,
+          category,
+          thumbnail,
+        },
+        ownerId
+      );
       websocketServer.emit(
         "getProducts",
         await productService.getProductsService({})

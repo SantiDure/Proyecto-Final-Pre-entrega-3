@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema(
             password: user["password"],
             age: user["age"],
             cart: user["cart"],
-            rol: "user",
+            rol: user["rol"],
           };
         }
         return datosUsuario;

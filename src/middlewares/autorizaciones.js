@@ -5,6 +5,13 @@ export function onlySessionActive(req, res, next) {
   next();
 }
 
+export function onlyAdminAndPremium(req, res, next) {
+  if (req.user.rol !== "admin" && req.user.rol !== "premium") {
+    res.redirect("/unauthorized");
+  }
+  next();
+}
+
 export function onlyAdmin(req, res, next) {
   if (req.user.rol !== "admin") {
     res.redirect("/unauthorized");
