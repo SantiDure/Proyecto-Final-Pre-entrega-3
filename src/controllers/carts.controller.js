@@ -93,8 +93,17 @@ export async function getCartByIdController(req, res) {
 export async function postAddProductToCartController(req, res) {
   const { cid, pid } = req.params;
   try {
-    await cartsManager.addProductToCart(cid, pid);
-    return res.status(201).json({ status: "ok" });
+    const userEmail = req.user.email;
+    console.log(`email del usuario: ${userEmail}`);
+    const product = await productService.getProductByIdService(pid);
+    console.log(`owner del producto: ${product.owner}`);
+    const productOwner = await product.owner;
+    if (userEmail !== productOwner) {
+      await cartsManager.addProductToCart(cid, pid);
+      return res.status(201).json({ status: "ok" });
+    } else {
+      return res.status(401).json({ status: "error", message: error.message });
+    }
   } catch (error) {
     res.status(400).send({ message: error.message });
   }

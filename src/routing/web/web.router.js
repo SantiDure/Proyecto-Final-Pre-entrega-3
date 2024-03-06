@@ -3,6 +3,7 @@ import {
   onlyAdminAndPremium,
   onlySessionActive,
   onlyUser,
+  onlyUserAndPremium,
 } from "../../middlewares/autorizaciones.js";
 import { productsManager } from "../../dao/product.dao.mongoose.js";
 import { cartService } from "../../services/index.js";
@@ -50,7 +51,7 @@ webRouter.get("/chat", onlySessionActive, onlyUser, (req, res) => {
 webRouter.get(
   "/products",
   onlySessionActive,
-  onlyUser,
+  onlyUserAndPremium,
   async (req, res, next) => {
     const criterioDeBusqueda = {};
     const opcionesDePaginacion = {

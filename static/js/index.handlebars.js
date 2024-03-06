@@ -2,11 +2,10 @@ async function getProducts() {
   const listaProductos = document.querySelector(".listaProductos");
   const response = await fetch("/api/products");
   const products = await response.json();
-
-  if (products[0]) {
-    console.log(products.payload);
+  if (products) {
     listaProductos.innerHTML = "";
-    products.map((product) => {
+
+    products.payload.map((product) => {
       let divProduct = document.createElement("div");
       divProduct.innerHTML = `         
                  <div class="card" style="width: 18rem;">

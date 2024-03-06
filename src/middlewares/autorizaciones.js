@@ -11,6 +11,12 @@ export function onlyAdminAndPremium(req, res, next) {
   }
   next();
 }
+export function onlyUserAndPremium(req, res, next) {
+  if (req.user.rol !== "user" && req.user.rol !== "premium") {
+    res.redirect("/unauthorized");
+  }
+  next();
+}
 
 export function onlyAdmin(req, res, next) {
   if (req.user.rol !== "admin") {
