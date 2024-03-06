@@ -59,6 +59,7 @@ export async function authenticate(req, res, next) {
   try {
     const decoded = await decrypt(req.token);
     req.user = decoded;
+
     next();
   } catch (error) {
     res.status(401).json({

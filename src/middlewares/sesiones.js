@@ -1,9 +1,9 @@
 import session from "express-session";
 import connectMongo from "connect-mongo";
+import { MONGODB_CNX_STR } from "../config/config.js";
 
 const store = connectMongo.create({
-  mongoUrl:
-    "mongodb+srv://SantiDure:Sd232702@cluster0.gb6sgd5.mongodb.net/ecommerce",
+  mongoUrl: MONGODB_CNX_STR,
 });
 
 export const sesiones = session({
