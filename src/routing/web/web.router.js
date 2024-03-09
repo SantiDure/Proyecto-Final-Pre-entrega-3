@@ -8,6 +8,8 @@ import {
 import { productsManager } from "../../dao/product.dao.mongoose.js";
 import { cartService } from "../../services/index.js";
 import { logger } from "../../utils/logger.js";
+import passport from "passport";
+import { extractTokenFromCookie } from "../../middlewares/cookies.js";
 export const webRouter = Router();
 
 webRouter.get("/", (req, res) => {
@@ -94,6 +96,18 @@ webRouter.get(
       title: "cart",
       products: productList,
       productsInCart: productList.products.length > 0,
+    });
+  }
+);
+
+webRouter.get(
+  "/resetpasswordform",
+  passport.authenticate("jwt", { failWithError: true }),
+  (req, res) => {
+    console.log(JSON.stringify(req.user, null, 2));
+    res.render("resetpasswordform.handlebars", {
+      title: "reestablecer contraseña",
+      ...req.user,
     });
   }
 );

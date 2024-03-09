@@ -17,13 +17,13 @@ formLogout?.addEventListener("submit", async (event) => {
 
 async function changeRol() {
   try {
-    const response = await fetch("api/sessions/current");
+    const response = await fetch("api/users/current");
     if (!response.ok) {
       throw new Error("Error al obtener el usuario actual");
     }
 
     const user = await response.json();
-    const userId = user._id;
+    const userId = user.payload._id;
     console.log("user: " + user);
     const responseRol = await fetch(`/api/users/premium/${userId}`, {
       method: "PUT", // Cambiamos el método a PUT
@@ -43,5 +43,25 @@ async function changeRol() {
     console.error("Error al cambiar el rol:", error);
     // Manejar el error según tus necesidades (por ejemplo, mostrar una alerta)
     return null;
+  }
+}
+
+async function resetPassword(token) {
+  try {
+    const response = await fetch(`/api/sessions/resetpassword/${token}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Error al reestablecer la contraseña");
+    }
+
+    // Si la respuesta es exitosa, redirige al usuario a la página de resetpasswordform
+    window.location.href = "/resetpasswordform";
+  } catch (error) {
+    console.error(error.message);
+    // Maneja el error de alguna manera, por ejemplo, mostrando un mensaje al usuario
   }
 }

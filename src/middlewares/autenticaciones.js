@@ -16,6 +16,7 @@ import { userService } from "../services/index.js";
 export async function appendJwtAsCookie(req, res, next) {
   try {
     const token = await encrypt(req.user);
+    req.user.token = token;
     res.cookie("auth", token, COOKIE_OPTS);
     next();
   } catch (error) {

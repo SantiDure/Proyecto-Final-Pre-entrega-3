@@ -1,9 +1,12 @@
 import { userService } from "../services/index.js";
 import { hashear } from "../utils/criptograph.js";
 import passport from "passport";
+import clearCookie from "cookie-parser";
+import { COOKIE_OPTS } from "../config/config.js";
 export async function postUserController(req, res) {
   try {
     req.body.password = hashear(req.body.password);
+
     const user = await userService.createUserService(req.body);
 
     res.status(201).json({
@@ -72,5 +75,21 @@ export async function changeRolUserAndPremiumController(req, res) {
     return res.status(200).json({ status: "success", payload: updated });
   } catch (error) {
     res.status(404).json({ status: "error", message: error.message });
+  }
+}
+
+export async function resetPasswordController(req, res) {
+  try {
+    const { uid } = req.params;
+    const newPassword = req.body.newPassword;
+    const user = await userService.updateOneService(uid, {
+      $set: { password: hashear(newPassword) },
+    });
+    res
+      .status(200)
+      .json({ message: "Contraseña actualizada correctamente", newPassword });
+  } catch (error) {
+    console.error("Error al actualizar la contraseña:", error);
+    res.status(500).json({ error: "Error al actualizar la contraseña" });
   }
 }

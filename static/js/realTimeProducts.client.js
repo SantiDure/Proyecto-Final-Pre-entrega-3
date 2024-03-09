@@ -43,7 +43,7 @@ form?.addEventListener("submit", async (event) => {
   const category = document.querySelector("#category").value;
   const thumbnail = document.querySelector("#thumbnail").value;
   //obteniendo el owner
-  const user = await fetch("/api/sessions/current");
+  const user = await fetch("/api/users/current");
   const userJson = await user.json();
   const ownerId = userJson.email;
   console.log(userJson);
@@ -115,7 +115,7 @@ socket.on("getProducts", async () => {
         deleteButton.classList.add("btn", "btn-danger");
         deleteButton.addEventListener("click", async () => {
           const productID = product._id;
-          const user = await fetch("/api/sessions/current");
+          const user = await fetch("/api/users/current");
           const userJson = await user.json();
 
           switch (userJson.rol) {

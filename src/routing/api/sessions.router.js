@@ -1,8 +1,12 @@
 import { Router } from "express";
 import passport from "passport";
-import { appendJwtAsCookie } from "../../middlewares/autenticaciones.js";
+import {
+  appendJwtAsCookie,
+  removeJwtFromCookies,
+} from "../../middlewares/autenticaciones.js";
 import { userDTO } from "../../dto/user.dto.js";
 import { logger } from "../../utils/logger.js";
+
 export const sessionRouter = Router();
 
 sessionRouter.post(
@@ -23,7 +27,7 @@ sessionRouter.post(
 
 sessionRouter.get(
   "/current",
-  // passport.authenticate("jwt", { failWithError: true }),
+  passport.authenticate("jwt", { failWithError: true }),
   function (req, res) {
     console.log(req.user);
     return res.json(new userDTO(req.user));
@@ -50,8 +54,23 @@ sessionRouter.get(
   })
 );
 
-sessionRouter.delete("/current", async (req, res) => {
+sessionRouter.delete("/current", removeJwtFromCookies, async (req, res) => {
   req.session.destroy((err) => {
     res.status(204).json({ message: "logout success" });
   });
 });
+
+sessionRouter.post(
+  "/resetpassword/:token",
+  appendJwtAsCookie,
+  passport.authenticate("jwt", { failWithError: true }),
+  async (req, res) => {
+    try {
+      logger.info("user: " + req.user);
+      return res.status(200).json({ status: "success" });
+    } catch (error) {
+      console.log(error.message);
+      return res.status(500).json({ error: error.message });
+    }
+  }
+);

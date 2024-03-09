@@ -7,5 +7,6 @@ export class userDTO {
     this.age = user.age;
     this.cart = user.cart;
     this.rol = user.rol;
+    this.token = user.token;
   }
 }

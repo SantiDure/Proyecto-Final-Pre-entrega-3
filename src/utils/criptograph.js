@@ -39,3 +39,19 @@ export async function decrypt(token) {
     });
   });
 }
+
+export function encryptOneHour(data) {
+  return new Promise((resolve, reject) => {
+    if (!data) {
+      reject(new Error("Invalid data for encryption"));
+    }
+    jwt.sign(data, JWT_SECRET, { expiresIn: "1h" }, (err, encoded) => {
+      //encoded:datos encriptados
+      if (err) {
+        reject(err);
+      } else {
+        resolve(encoded);
+      }
+    });
+  });
+}
