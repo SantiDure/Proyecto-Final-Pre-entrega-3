@@ -10,12 +10,6 @@ paths:
       required: true
       type: string
       description: el _id del producto solicitado
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Product'
       responses:
         - '200':
             description: lista con los products.

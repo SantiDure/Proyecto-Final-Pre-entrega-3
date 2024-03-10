@@ -3,22 +3,16 @@ paths:
     get:
       summary: trae todos los products
       tags:
-      - Products  
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Product'
+        - Products
       responses:
-       - "200":
-          description: lista con los products.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Product'
-       - "404":
-            description: "error de http 404."
+        - '200':
+            description: lista con los products.
             content:
               application/json:
-                message: 'error contenido en el mensaje'
+                schema:
+                  $ref: '#/components/schemas/Product'
+        - '404':
+            description: error de http 404.
+            content:
+              application/json:
+                message: error contenido en el mensaje
