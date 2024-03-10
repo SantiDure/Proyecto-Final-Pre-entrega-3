@@ -3,16 +3,16 @@ paths:
     get:
       summary: trae todos los carts
       tags:
-      - Carts  
+        - Carts
       responses:
-       - "200":
+        - '200':
             description: lista con los carts.
-            content:
+            content: null
             application/json:
               schema:
                 $ref: '#/components/schemas/Cart'
-       - "404":
-            description: "error de http 404."
+        - '404':
+            description: error de http 404.
             content:
               application/json:
-                message: 'error contenido en el mensaje'
+                message: error contenido en el mensaje

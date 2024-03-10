@@ -1,11 +1,11 @@
 paths:
-  /api/products/{pid}:
+  '/api/products/{pid}':
     get:
       summary: trae 1 product segun su _id
       tags:
-      - Products  
+        - Products
       parameters:
-      - name: _id
+        - name: _id
       in: path
       required: true
       type: string
@@ -17,14 +17,14 @@ paths:
             schema:
               $ref: '#/components/schemas/Product'
       responses:
-       - "200":
+        - '200':
             description: lista con los products.
-            content:
+            content: null
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
-       - "404":
-            description: "error de http 404."
+        - '404':
+            description: error de http 404.
             content:
               application/json:
-                message: 'error contenido en el mensaje'
+                message: error contenido en el mensaje

@@ -1,0 +1,21 @@
+paths:
+  '/api/carts/{cid}':
+    put:
+      summary: actualiza el contenido de un carrito
+      tags:
+        - Carts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: el id del cart esperado
+      responses:
+        - '201':
+            description: 'mensaje http, created. _id del cart modificado'
+            content: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        - '404':
+            description: error de http 404. Not found

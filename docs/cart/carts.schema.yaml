@@ -10,9 +10,8 @@ components:
           type: Array
           description: contiene el _id de un producto y la cantidad agregada al carrito.
       example:
-        _id: 'fa9s8d7f9a8sd7f09a8sd7f0a890d0af5'
+        _id: fa9s8d7f9a8sd7f09a8sd7f0a890d0af5
         products:
-          array: [
-            _id: "fa9s8d7f9a8sd7f09a8sdfcedvefe",
-            quantity: 2
-          ]
+          array:
+            - _id: fa9s8d7f9a8sd7f09a8sdfcedvefe
+            - quantity: 2

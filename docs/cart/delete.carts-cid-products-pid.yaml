@@ -1,0 +1,33 @@
+paths:
+  '/api/carts/{cid}/products/{pid}':
+    delete:
+      summary: 'quita un product de un cart, ambos buscado por su _id'
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          type: string
+          description: el id del cart buscado
+        - name: pid
+          in: path
+          required: true
+          type: string
+          description: el id del producto al que se le modificará la cantidad
+      responses:
+        - '200':
+            description: producto quitado del carrito
+            type: null
+            aplication/json:
+              message: producto quitado del carrito
+        - '404':
+            description: not found.
+            type: null
+            aplication/json:
+              message: not found
+        - '500':
+            description: server error
+            type: null
+            aplication/json:
+              message: server error

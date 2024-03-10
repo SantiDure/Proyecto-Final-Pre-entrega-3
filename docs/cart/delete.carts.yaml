@@ -1,0 +1,19 @@
+paths:
+  /api/carts/:
+    delete:
+      summary: >-
+        elimina todos los carts del sistema, solo permitido para rol de
+        administrador
+      tags:
+        - Carts
+      responses:
+        - '200':
+            description: carts eliminados.
+            content: null
+            application/json:
+              message: carts eliminados
+        - '404':
+            description: Not found
+            content:
+              application/json:
+                message: Not found

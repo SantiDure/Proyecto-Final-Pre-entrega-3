@@ -1,0 +1,31 @@
+paths:
+  '/api/carts/{cid}/products/{pid}':
+    put:
+      summary: >-
+        modifica la cantidad de un producto agrgado a un carrito, ambos buscado
+        por su _id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          type: string
+          description: el id del cart buscado
+        - name: pid
+          in: path
+          required: true
+          type: string
+          description: el id del producto al que se le modificará la cantidad
+          requestBody:
+            required: true
+          content:
+            application/json:
+              quantity: cantidad del producto dentro del cart
+      responses:
+        - '201':
+            description: status http ok.
+        - '401':
+            description: error de http unauthorized.
+        - '500':
+            description: server error http

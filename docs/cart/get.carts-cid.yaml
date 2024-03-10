@@ -1,24 +1,24 @@
 paths:
-  /api/carts/{cid}:
+  '/api/carts/{cid}':
     get:
       summary: trae 1 cart segun su _id
       tags:
-      - Carts  
+        - Carts
       parameters:
-      - name: id
-        in: path
-        required: true
-        type: string
-        description: el id del cart esperado  
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: el id del cart esperado
       responses:
-       - "200":
+        - '200':
             description: carts coincidente con el _id.
-            content:
+            content: null
             application/json:
               schema:
                 $ref: '#/components/schemas/Cart'
-       - "404":
-            description: "error de http 404."
+        - '404':
+            description: error de http 404.
             content:
               application/json:
-                message: 'error contenido en el mensaje'
+                message: error contenido en el mensaje

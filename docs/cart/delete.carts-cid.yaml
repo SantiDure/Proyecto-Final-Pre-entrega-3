@@ -1,0 +1,23 @@
+paths:
+  '/api/carts/{cid}':
+    delete:
+      summary: 'elimina 1 cart del sistema, buscado por su _id'
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          type: string
+          description: el id del cart buscado
+      responses:
+        - '200':
+            description: cart eliminado.
+            content: null
+            application/json:
+              message: cart eliminado
+        - '404':
+            description: Not found
+            content:
+              application/json:
+                message: Not found

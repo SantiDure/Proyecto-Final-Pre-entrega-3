@@ -1,0 +1,24 @@
+paths:
+  '/api/carts/{cid}/products/{pid}':
+    post:
+      summary: 'agrega un producto a un carrito, ambos definidos por su _id'
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          type: string
+          description: el id del cart buscado
+        - name: pid
+          in: path
+          required: true
+          type: string
+          description: el id del producto a agregar al carrito
+      responses:
+        - '200':
+            description: cantidad actualzada
+        - '400':
+            description: error al actualizar la cantidad del producto dentro del cart.
+        - '500':
+            description: server error http

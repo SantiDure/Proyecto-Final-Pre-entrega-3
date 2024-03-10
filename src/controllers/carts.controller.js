@@ -105,7 +105,7 @@ export async function postAddProductToCartController(req, res) {
       return res.status(401).json({ status: "error", message: error.message });
     }
   } catch (error) {
-    res.status(400).send({ message: error.message });
+    res.status(500).send({ message: error.message });
   }
 }
 
@@ -122,7 +122,7 @@ export async function deleteCartController(req, res) {
   const { cid } = req.params;
   try {
     await cartService.updateOneService(cid, { products: [] });
-    res.json(req.body);
+    res.status(200).json({ message: "cart eliminado" });
   } catch (error) {
     res.status(404).send({ message: error.message });
   }
@@ -131,7 +131,7 @@ export async function deleteCartController(req, res) {
 export async function deleteManyCartController(req, res) {
   try {
     await cartService.deleteManyService({});
-    res.json(req.body);
+    res.status(200).json({ message: "carts eliminados" });
   } catch (error) {
     res.status(404).send({ message: error.message });
   }
@@ -143,15 +143,15 @@ export async function deleteProductOnCartController(req, res) {
     const cart = await cartService.getCartByIdService(cid);
     const product = await productService.getProductByIdService(pid);
     if (!cart || !product) {
-      res.status(404).send({
+      res.status(404).json({
         message: "el producto o el carrito no fueron encontrados",
       });
     } else {
       await cartsManager.deleteProductOnCart(cid, pid);
-      res.status(200).send(`product deleted id: ${pid}`);
+      res.status(200).json({ message: `producto quitado del carrito` });
     }
   } catch (error) {
-    res.status(500);
+    res.status(500).json();
   }
 }
 
@@ -161,7 +161,7 @@ export async function updateCartController(req, res) {
   try {
     await cartService.updateOneService(cid, { products: [] });
     await cartService.updateOneService(cid, { products: req.body });
-    res.json(cid);
+    res.status(201).json(cid);
   } catch (error) {
     res.status(404).send({ message: error.message });
   }
