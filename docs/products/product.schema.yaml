@@ -1,0 +1,55 @@
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: String
+          description: _id del producto
+        
+        title:
+          type: String
+          description: nombre del producto
+        
+        description: 
+          type: String
+          description: Descripcion breve del producto
+        
+        code:
+          type: String
+          description: Codigo unico para listar el producto
+        
+        price:
+          type: Nomber
+          description: Precio del producto
+        
+        status:
+          type: Boolean
+          description: Estado de disponibilidad del producto
+        
+        stock:
+          type: Number
+          description: Cantidad de dicho producto disponible para la venta
+        
+        category:
+          type: String
+          description: Categoria a la que pertenece el producto
+        
+        thumbnail:
+          type: Array
+          description: Imagen/es de dicho producto en caso de tenerla/s
+        
+        owner:
+          type: String
+          description: email de la persona la cual registro el producto en el sistema
+      example:
+        _id: "nvjakbnvkjbvkvbndjkvbajkdvb"
+        title: "Zapato"
+        description: "Zapato elegante negro, size 40"
+        code: "KHK23"
+        price: 230
+        status: true
+        stock: 21
+        category: "Ropa de gala"
+        thumbnail: ["./imagendezapatonegrodevestir.jpg"]
+        owner: "vendedor@gmail.com"

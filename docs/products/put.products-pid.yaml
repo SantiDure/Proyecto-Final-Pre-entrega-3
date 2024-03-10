@@ -1,0 +1,30 @@
+paths:
+  /api/products/{pid}:
+    put:
+      summary: edita cualquier campo de un product
+      tags:
+      - Products  
+      parameters:
+      - name: _id
+      in: path
+      required: true
+      type: string
+      description: el _id del producto a editar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+       - "201":
+            description: _id del product editado.
+            content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+       - "404":
+            description: "error de http 404."
+            content:
+              application/json:
+                message: 'error contenido en el mensaje'

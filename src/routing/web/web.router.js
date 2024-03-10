@@ -10,6 +10,8 @@ import { cartService } from "../../services/index.js";
 import { logger } from "../../utils/logger.js";
 import passport from "passport";
 import { extractTokenFromCookie } from "../../middlewares/cookies.js";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUiExpress from "swagger-ui-express";
 export const webRouter = Router();
 
 webRouter.get("/", (req, res) => {
@@ -111,3 +113,16 @@ webRouter.get(
     });
   }
 );
+
+const spec = swaggerJSDoc({
+  definition: {
+    openapi: "3.0.1",
+    info: {
+      version: "1",
+      title: "Swagger demo",
+      description: "Demo de swagger para coderhouse",
+    },
+  },
+  apis: ["./docs/**/*.yaml"],
+});
+webRouter.use("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(spec));

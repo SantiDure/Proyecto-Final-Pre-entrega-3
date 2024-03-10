@@ -57,7 +57,7 @@ export async function putProductController(req, res) {
   const { id } = req.params;
   try {
     await productService.updateOneService(id, req.body);
-    res.json(id);
+    res.status(201).json(id);
   } catch (error) {
     res.status(404).send({ message: error.message });
   }
@@ -66,8 +66,8 @@ export async function putProductController(req, res) {
 export async function deleteProductController(req, res) {
   const { id } = req.params;
   try {
-    await productService.deleteOneService(id);
-    res.json(req.body);
+    const product = await productService.deleteOneService(id);
+    res.status(200).json(product);
   } catch (error) {
     res.status(404).send({ message: error.message });
   }

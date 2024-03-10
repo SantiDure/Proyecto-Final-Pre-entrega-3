@@ -15,3 +15,5 @@ export const GITHUB_CALLBACK_URL =
   "http://localhost:8080/api/sessions/githubcallback";
 export const COOKIE_SECRET = process.env.COOKIE_SECRET;
 export const JWT_SECRET = process.env.JWT_SECRET;
+export const EMAIL = process.env.EMAIL;
+export const EMAIL_PASS = process.env.EMAIL_PASS;

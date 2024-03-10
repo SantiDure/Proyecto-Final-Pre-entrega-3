@@ -753,3 +753,53 @@
 {"level":"info","message":"servidor levantado en el puerto 8080"}
 {"level":"info","message":{"_id":"0b93bf47-6cc7-4810-b136-8bfeb26935a4","age":null,"cart":{"_id":"0211043a-1bd1-4f12-84b6-560f41e1b88f","products":[]},"email":"puma@puma.com","first_name":"","last_name":"","password":"$2b$10$OgGakVyjYu15YgE3UWIBOuFSGEltekM5fuRWt.feEPjqJZd77b4dG","rol":"user","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIwYjkzYmY0Ny02Y2M3LTQ4MTAtYjEzNi04YmZlYjI2OTM1YTQiLCJlbWFpbCI6InB1bWFAcHVtYS5jb20iLCJmaXJzdF9uYW1lIjoiIiwibGFzdF9uYW1lIjoiIiwicGFzc3dvcmQiOiIkMmIkMTAkT2dHYWtWeWpZdTE1WWdFM1VXSUJPdUZTR0VsdGVrTTVmdVJXdC5mZUVQanFKWmQ3N2I0ZEciLCJhZ2UiOm51bGwsImNhcnQiOnsiX2lkIjoiMDIxMTA0M2EtMWJkMS00ZjEyLTg0YjYtNTYwZjQxZTFiODhmIiwicHJvZHVjdHMiOltdfSwicm9sIjoidXNlciIsImlhdCI6MTcwOTk0MzU0MSwiZXhwIjoxNzEwMDI5OTQxfQ.zT2YYHra-yvl3GHhxFBA2azXPCjmj4fShDKdATdahu0"}}
 {"level":"info","message":{"_id":"0b93bf47-6cc7-4810-b136-8bfeb26935a4","age":null,"cart":{"_id":"0211043a-1bd1-4f12-84b6-560f41e1b88f","products":[]},"email":"puma@puma.com","first_name":"","last_name":"","password":"$2b$10$rGplrSHXOqKE5uqHGLxeLO0c0bPM0Nc9f4ubKdvRDWLkLn7/cIXh2","rol":"user","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIwYjkzYmY0Ny02Y2M3LTQ4MTAtYjEzNi04YmZlYjI2OTM1YTQiLCJlbWFpbCI6InB1bWFAcHVtYS5jb20iLCJmaXJzdF9uYW1lIjoiIiwibGFzdF9uYW1lIjoiIiwicGFzc3dvcmQiOiIkMmIkMTAkckdwbHJTSFhPcUtFNXVxSEdMeGVMTzBjMGJQTTBOYzlmNHViS2R2UkRXTGtMbjcvY0lYaDIiLCJhZ2UiOm51bGwsImNhcnQiOnsiX2lkIjoiMDIxMTA0M2EtMWJkMS00ZjEyLTg0YjYtNTYwZjQxZTFiODhmIiwicHJvZHVjdHMiOltdfSwicm9sIjoidXNlciIsImlhdCI6MTcwOTk0MzczOCwiZXhwIjoxNzEwMDMwMTM4fQ._feF-HS_eU-s4_zZwFYiZNPciMfMlX2zAjjSXvv_5m4"}}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"servidor levantado en el puerto 8080"}

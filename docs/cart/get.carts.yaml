@@ -1,0 +1,18 @@
+paths:
+  /api/carts/:
+    get:
+      summary: trae todos los carts
+      tags:
+      - Carts  
+      responses:
+       - "200":
+            description: lista con los carts.
+            content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+       - "404":
+            description: "error de http 404."
+            content:
+              application/json:
+                message: 'error contenido en el mensaje'

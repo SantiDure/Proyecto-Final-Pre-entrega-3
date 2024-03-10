@@ -1,0 +1,22 @@
+paths:
+  /api/carts/:
+    post:
+      summary: registra un cart
+      tags:
+      - Carts  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cart'
+      responses:
+        "201":
+          description: cart recien registrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        "400":
+          description: error http
+          content: mensaje del error http

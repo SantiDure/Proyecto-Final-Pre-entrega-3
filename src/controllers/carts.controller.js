@@ -71,7 +71,7 @@ export async function getCartsController(req, res) {
       return res.json(data);
     }
     let limitedCarts = data.slice(0, limit);
-    return res.json(limitedCarts);
+    return res.status(200).json(limitedCarts);
   } catch (error) {
     res.status(404).send({ message: error.message });
   }
@@ -84,7 +84,7 @@ export async function getCartByIdController(req, res) {
       .getCartByIdService({ _id: cid })
       .populate("products._id");
 
-    return res.json({ cartForId });
+    return res.status(200).json({ cartForId });
   } catch (error) {
     res.status(404).send({ message: error.message });
   }
@@ -111,8 +111,8 @@ export async function postAddProductToCartController(req, res) {
 
 export async function postCartController(req, res) {
   try {
-    await cartService.createCartService(req.body);
-    res.json(req.body);
+    const cart = await cartService.createCartService(req.body);
+    res.status(201).json(cart);
   } catch (error) {
     res.status(400).send({ message: error.message });
   }

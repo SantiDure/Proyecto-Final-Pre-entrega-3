@@ -5,9 +5,10 @@ class GmailEmailService {
   constructor() {
     this.transport = nodemailer.createTransport({
       service: "gmail",
-      port: 587,
+      port: 582,
+      secure: false,
       auth: {
-        user: EMAIL_USER,
+        user: EMAIL,
         pass: EMAIL_PASS,
       },
     });

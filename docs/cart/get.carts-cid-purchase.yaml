@@ -1,0 +1,22 @@
+paths:
+  /api/carts/{cid}/purchase:
+    get:
+      summary: trae un ticket generado cuando finaliza la compra
+      tags:
+      - Carts  
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: el id del cart a buscar  
+      responses:
+      - "200":
+          description: devuelve el ticket con los detalles de la compra, y, en caso de haberlos, los productos que no se pueden comprar en ese momento por algun motivo.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+      - "500":
+          description: server error
+          content: mensaje del error http
