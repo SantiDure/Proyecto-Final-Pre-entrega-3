@@ -14,7 +14,7 @@ paths:
           in: path
           required: true
           type: string
-          description: el id del producto al que se le modificará la cantidad
+          description: el id del producto a eliminar del cart
       responses:
         - '200':
             description: producto quitado del carrito
