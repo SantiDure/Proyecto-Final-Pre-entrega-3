@@ -30,7 +30,7 @@ sessionRouter.get(
   passport.authenticate("jwt", { failWithError: true }),
   function (req, res) {
     console.log(req.user);
-    return res.json(new userDTO(req.user));
+    return res.status(200).json(new userDTO(req.user));
   }
 );
 
@@ -74,4 +74,3 @@ sessionRouter.post(
     }
   }
 );
- 
