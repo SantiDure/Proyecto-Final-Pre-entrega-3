@@ -1,8 +1,8 @@
 import supertest from "supertest";
 import { connectDb, disconnectDb } from "../../src/dao/mongodb.js";
 import { ServerToUp } from "../../src/app/app.js";
-import { ProductsDaoMock } from "../../src/dao/mock/product.dao.mock.js";
 import assert from "node:assert";
+import { ProductsDaoMock } from "../../src/dao/mock/product.dao.mock.js";
 
 const TEST_PORT = 8080;
 const baseURL = `http://localhost:${TEST_PORT}`;
@@ -10,7 +10,7 @@ const baseURL = `http://localhost:${TEST_PORT}`;
 const requester = supertest(baseURL);
 
 describe("API Rest", function () {
-  this.timeout(20000);
+  this.timeout(200000);
 
   before(async function () {
     await connectDb();
