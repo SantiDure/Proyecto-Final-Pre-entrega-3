@@ -1,6 +1,8 @@
 import supertest from "supertest";
 import { connectDb, disconnectDb } from "../../src/dao/mongodb.js";
 import { ServerToUp } from "../../src/app/app.js";
+import { ProductsDaoMock } from "../../src/dao/mock/product.dao.mock.js";
+import assert from "node:assert";
 
 const TEST_PORT = 8080;
 const baseURL = `http://localhost:${TEST_PORT}`;
@@ -41,6 +43,13 @@ describe("API Rest", function () {
               .post("/api/porducts/")
               .send(datosDeProduct)
               .expect(404);
+          });
+        });
+        describe("crear producto", function () {
+          it("debe tirar un error al haber datos invalidos", function () {
+            assert.throws(() => {
+              new ProductsDaoMock({});
+            });
           });
         });
       });
