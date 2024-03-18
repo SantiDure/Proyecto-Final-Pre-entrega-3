@@ -6,11 +6,14 @@ import { userService } from "../services/index.js";
 const productSchema = new Schema(
   {
     _id: { type: String, default: randomUUID },
-    title: { type: String },
-    description: { type: String },
-    code: { type: String },
-    price: { type: Number },
-    status: { type: Boolean },
+    title: { type: String, require: true },
+    description: {
+      type: String,
+      default: "El vendedor no proporciono una descripcion del producto",
+    },
+    code: { type: String, require: true, unique: true },
+    price: { type: Number, require: true },
+    status: { type: Boolean, default: true },
     stock: { type: Number, default: 0 },
     category: { type: String, default: "Otros" },
     thumbnail: { type: [String], default: [] },

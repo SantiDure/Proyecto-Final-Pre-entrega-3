@@ -815,3 +815,12 @@
 {"level":"info","message":"servidor levantado en el puerto 8080"}
 {"level":"info","message":"DB conectada"}
 {"level":"info","message":{"email":"admin","first_name":"admin","last_name":"admin","rol":"admin","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwiZmlyc3RfbmFtZSI6ImFkbWluIiwibGFzdF9uYW1lIjoiYWRtaW4iLCJyb2wiOiJhZG1pbiIsImlhdCI6MTcxMDYyNDE5OCwiZXhwIjoxNzEwNzEwNTk4fQ.2BMYHADDimh-nlRvmlzEQK29z_14p47eU1G244O_WqM"}}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
