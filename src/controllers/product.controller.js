@@ -33,9 +33,11 @@ export async function getProductController(req, res) {
 
 export async function getProductControllerId(req, res) {
   const id = req.params.id;
+
   try {
     const productForId = await productService.getProductByIdService(id);
-    return res.json({ productForId });
+
+    return res.status(200).json({ productForId });
   } catch (error) {
     res.status(404).send({ message: error.message });
   }
@@ -43,13 +45,19 @@ export async function getProductControllerId(req, res) {
 
 export async function postProductController(req, res) {
   try {
-    const product = await productService.createProductService(
-      req.body,
-      req.user.email
-    );
-    res.status(200).json(product);
+    if (!req.body) {
+      // Si req.body está vacío, devuelve 400 BAD REQUEST
+      res.status(400).send("Bad Request: req.body está vacío");
+    } else {
+      // De lo contrario, procesa la solicitud
+      const product = await productService.createProductService(
+        req.body,
+        req.user.email
+      );
+      res.status(200).json(product);
+    }
   } catch (error) {
-    res.status(400).send({ message: error.message });
+    res.status(500).send({ message: error.message });
   }
 }
 

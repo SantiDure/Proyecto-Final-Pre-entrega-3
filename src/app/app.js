@@ -8,8 +8,8 @@ import {
 } from "../middlewares/autenticaciones.js";
 import cookieParser from "cookie-parser";
 import { apiRouter } from "../routing/api/api.router.js";
+import mongoose from "mongoose";
 import { webRouter } from "../routing/web/web.router.js";
-
 export class ServerToUp {
   #server;
 
@@ -56,5 +56,13 @@ export class ServerToUp {
         resolve(true);
       });
     });
+  }
+  async connectDb() {
+    try {
+      await mongoose.connect(MONGODB_CNX_STR, { socketTimeoutMS: 45_000 });
+      return logger.info(`DB conectada`);
+    } catch (error) {
+      logger.error(error.message);
+    }
   }
 }
