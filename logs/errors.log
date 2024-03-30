@@ -174,3 +174,25 @@
 {"level":"info","message":{"email":"admin","first_name":"admin","last_name":"admin","rol":"admin","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwiZmlyc3RfbmFtZSI6ImFkbWluIiwibGFzdF9uYW1lIjoiYWRtaW4iLCJyb2wiOiJhZG1pbiIsImlhdCI6MTcxMDc5NDY4OSwiZXhwIjoxNzEwODgxMDg5fQ.PxleGWGjXzOH0fiHkMFAFusfbQZ3lQNLnAsAgrzTcvI"}}
 {"level":"info","message":{"email":"admin","first_name":"admin","last_name":"admin","rol":"admin","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwiZmlyc3RfbmFtZSI6ImFkbWluIiwibGFzdF9uYW1lIjoiYWRtaW4iLCJyb2wiOiJhZG1pbiIsImlhdCI6MTcxMDc5NDY4OSwiZXhwIjoxNzEwODgxMDg5fQ.PxleGWGjXzOH0fiHkMFAFusfbQZ3lQNLnAsAgrzTcvI"}}
 {"level":"info","message":"DB desconectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB desconectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB desconectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":{"email":"admin","first_name":"admin","last_name":"admin","rol":"admin","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwiZmlyc3RfbmFtZSI6ImFkbWluIiwibGFzdF9uYW1lIjoiYWRtaW4iLCJyb2wiOiJhZG1pbiIsImlhdCI6MTcxMDg5NDEzOSwiZXhwIjoxNzEwOTgwNTM5fQ.trDqa1vpaanORFXVPVYqydX04XlMJqZqKjDJODiBh2w"}}
+{"level":"info","message":{"email":"admin","first_name":"admin","last_name":"admin","rol":"admin","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwiZmlyc3RfbmFtZSI6ImFkbWluIiwibGFzdF9uYW1lIjoiYWRtaW4iLCJyb2wiOiJhZG1pbiIsImlhdCI6MTcxMDg5NDEzOSwiZXhwIjoxNzEwOTgwNTM5fQ.trDqa1vpaanORFXVPVYqydX04XlMJqZqKjDJODiBh2w"}}
+{"level":"info","message":"DB desconectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"error","message":"status function status(code) {\n  if ((typeof code === 'string' || Math.floor(code) !== code) && code > 99 && code < 1000) {\n    deprecate('res.status(' + JSON.stringify(code) + '): use res.status(' + Math.floor(code) + ') instead')\n  }\n  this.statusCode = code;\n  return this;\n} - message: ENOENT: no such file or directory, open 'C:\\public\\img\\logo cable navidad.png'"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"error","message":"status function status(code) {\n  if ((typeof code === 'string' || Math.floor(code) !== code) && code > 99 && code < 1000) {\n    deprecate('res.status(' + JSON.stringify(code) + '): use res.status(' + Math.floor(code) + ') instead')\n  }\n  this.statusCode = code;\n  return this;\n} - message: ENOENT: no such file or directory, open 'C:\\C:\\Users\\santi\\Desktop\\Coderhouse\\Backend\\Entregables\\Proyecto-Final-MongoDB-Pre-entrega-3\\src\\uploads\\logo cable navidad.png'"}
+{"level":"error","message":"status function status(code) {\n  if ((typeof code === 'string' || Math.floor(code) !== code) && code > 99 && code < 1000) {\n    deprecate('res.status(' + JSON.stringify(code) + '): use res.status(' + Math.floor(code) + ') instead')\n  }\n  this.statusCode = code;\n  return this;\n} - message: ENOENT: no such file or directory, open 'C:\\C:\\Users\\santi\\Desktop\\Coderhouse\\Backend\\Entregables\\Proyecto-Final-MongoDB-Pre-entrega-3\\src\\uploads\\logo cable navidad.png'"}
+{"level":"info","message":"DB conectada"}
+{"level":"info","message":"DB conectada"}
+{"level":"error","message":"status function status(code) {\n  if ((typeof code === 'string' || Math.floor(code) !== code) && code > 99 && code < 1000) {\n    deprecate('res.status(' + JSON.stringify(code) + '): use res.status(' + Math.floor(code) + ') instead')\n  }\n  this.statusCode = code;\n  return this;\n} - message: Unexpected field"}
+{"level":"info","message":"DB conectada"}
+{"level":"error","message":"status function status(code) {\n  if ((typeof code === 'string' || Math.floor(code) !== code) && code > 99 && code < 1000) {\n    deprecate('res.status(' + JSON.stringify(code) + '): use res.status(' + Math.floor(code) + ') instead')\n  }\n  this.statusCode = code;\n  return this;\n} - message: Unexpected field"}

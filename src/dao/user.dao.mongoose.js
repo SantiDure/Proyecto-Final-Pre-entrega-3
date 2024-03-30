@@ -14,6 +14,11 @@ const userSchema = new mongoose.Schema(
     last_name: { type: String, default: "unknow" },
     age: { type: Number, default: 0 },
     cart: { type: Object, required: true },
+    documents: {
+      type: [Object],
+      default: [{ name: "unknow name", reference: "unknow link" }],
+    },
+    last_connection: { type: Date },
     rol: { type: String, enum: ["admin", "user", "premium"], default: "user" },
   },
   {
@@ -52,6 +57,8 @@ const userSchema = new mongoose.Schema(
             password: user["password"],
             age: user["age"],
             cart: user["cart"],
+            documents: user["documents"],
+            last_connection: user["last_connection"],
             rol: user["rol"],
           };
         }

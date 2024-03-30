@@ -1,8 +1,14 @@
 import { userService } from "../services/index.js";
 import { hashear } from "../utils/criptograph.js";
 import passport from "passport";
-import clearCookie from "cookie-parser";
-import { COOKIE_OPTS } from "../config/config.js";
+
+export async function postDocumentsController(req, res) {
+  if (!req.file) {
+    res.status(400).json({ status: "error", message: "falta archivo" });
+  }
+  res.status(200).json({ status: "success", message: "archivo subido" });
+}
+
 export async function postUserController(req, res) {
   try {
     req.body.password = hashear(req.body.password);
