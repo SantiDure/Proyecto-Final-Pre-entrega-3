@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { randomUUID } from "node:crypto";
 import { hashCompare } from "../utils/criptograph.js";
 import { generateUniqueUsername } from "../utils/randomUserName.js";
-import { cartService } from "../services/index.js";
+import { cartService, userService } from "../services/index.js";
 import { newError, ErrorType } from "../errors/errors.js";
 const collection = "users";
 const userSchema = new mongoose.Schema(
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
       type: [Object],
       default: [{ name: "unknow name", reference: "unknow link" }],
     },
-    last_connection: { type: Date },
+    last_connection: { type: String },
     rol: { type: String, enum: ["admin", "user", "premium"], default: "user" },
   },
   {
@@ -36,10 +36,11 @@ const userSchema = new mongoose.Schema(
             rol: "admin",
           };
         } else {
-          const user = await mongoose
-            .model(collection)
-            .findOne({ email })
-            .lean();
+          let user = await mongoose.model(collection).findOne({ email }).lean();
+          const userUpdated = await userService.updateOneService(user._id, {
+            $set: { last_connection: Date(Date.now).toLocaleString() },
+          });
+          user = userUpdated;
 
           if (!user) {
             throw newError(ErrorType.BAD_REQUEST, "login failed");
@@ -48,7 +49,6 @@ const userSchema = new mongoose.Schema(
           if (!hashCompare(password, user["password"])) {
             throw newError(ErrorType.UNAUTHORIZED, "login failed");
           }
-
           datosUsuario = {
             _id: user["_id"],
             email: user["email"],

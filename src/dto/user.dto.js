@@ -7,7 +7,7 @@ export class userDTO {
     this.age = user.age;
     this.cart = user.cart;
     this.documents = user.documents;
-    this.last_connection = user.last_connection;
+    this.last_connection = Date(Date.now).toLocaleString();
     this.rol = user.rol;
     this.token = user.token;
   }

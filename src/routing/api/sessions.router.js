@@ -6,6 +6,7 @@ import {
 } from "../../middlewares/autenticaciones.js";
 import { userDTO } from "../../dto/user.dto.js";
 import { logger } from "../../utils/logger.js";
+import { userService } from "../../services/index.js";
 
 export const sessionRouter = Router();
 
@@ -55,6 +56,9 @@ sessionRouter.get(
 );
 
 sessionRouter.delete("/current", removeJwtFromCookies, async (req, res) => {
+  await userService.updateOneService(req.user._id, {
+    $set: { last_connection: Date(Date.now).toLocaleString() },
+  });
   req.session.destroy((err) => {
     res.status(204).json({ message: "logout success" });
   });

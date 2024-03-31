@@ -1,12 +1,33 @@
 import { userService } from "../services/index.js";
 import { hashear } from "../utils/criptograph.js";
+import path from "path";
+import { fileURLToPath } from "url";
 import passport from "passport";
 
 export async function postDocumentsController(req, res) {
-  if (!req.file) {
-    res.status(400).json({ status: "error", message: "falta archivo" });
+  try {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const typeOfDocument = req.params.typeofdocument;
+    if (!req.file) {
+      res.status(400).json({ status: "error", message: "falta archivo" });
+    }
+    if (!req.body.docName) {
+      res.status(400).json({ status: "error", message: "falta BODY" });
+    }
+    const newDoc = {
+      name: req.body.docName,
+      reference: path.join(
+        __dirname,
+        `../uploads/${typeOfDocument}/${req.file.originalname}`
+      ),
+    };
+    await userService.updateOneService(uid, { $push: { documents: newDoc } });
+    res.status(200).json({ status: "success", message: "archivo subido" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ status: "error de servidor", message: error.message });
   }
-  res.status(200).json({ status: "success", message: "archivo subido" });
 }
 
 export async function postUserController(req, res) {
@@ -66,24 +87,39 @@ export async function deleteUserController(req, res) {
 export async function changeRolUserAndPremiumController(req, res) {
   const { uid } = req.params;
   const user = await userService.getUserByIdService({ _id: uid });
+  //NOTAS:
+  //aca abajo voy a comprobar si existen con ese name en especifico porque mi idea es que desde el front, esto se elija con un menu opcional desplegable
+  //solo hago esta comprobacion ya que, todos los usuarios se crean siendo su rol "user", y luego se procede a darle premium mediante su respectivo endpoint, por lo tanto, si para ser premium se hace esta comprobacion, no es necesario hacerla al reves, ya que nadie se registra siendo premium
+  if (
+    user.documents.some((doc) => {
+      "identification" == doc.name;
+    }) &&
+    user.documents.some((doc) => {
+      "adress" == doc.name;
+    }) &&
+    user.documents.some((doc) => {
+      "account_state" == doc.name;
+    })
+  ) {
+    try {
+      if (user.rol === "user") {
+        user.rol = "premium";
+      } else if (user.rol === "premium") {
+        user.rol = "user";
+      }
 
-  try {
-    if (user.rol === "user") {
-      user.rol = "premium";
-    } else if (user.rol === "premium") {
-      user.rol = "user";
+      const updated = await userService.updateOneService(uid, {
+        $set: { rol: user.rol },
+      });
+
+      return res.status(200).json({ status: "success", payload: updated });
+    } catch (error) {
+      return res.status(404).json({ status: "error", message: error.message });
     }
-
-    const updated = await userService.updateOneService(uid, {
-      $set: { rol: user.rol },
-    });
-
-    return res.status(200).json({ status: "success", payload: updated });
-  } catch (error) {
-    res.status(404).json({ status: "error", message: error.message });
+  } else {
+    return res.status(400).json({ status: "error", message: "bad request" });
   }
 }
-
 export async function resetPasswordController(req, res) {
   try {
     const { uid } = req.params;
