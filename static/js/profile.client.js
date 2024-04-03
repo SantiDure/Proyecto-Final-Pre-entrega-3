@@ -58,8 +58,19 @@ async function resetPassword(token) {
       throw new Error("Error al reestablecer la contraseña");
     }
 
-    // Si la respuesta es exitosa, redirige al usuario a la página de resetpasswordform
-    window.location.href = "/resetpasswordform";
+    //DEBE ENVIAR UN MAIL, CON UN BOTON, QUE REDIRIJA A LA PAGINA PARA RESETAR LA CONTRASEÑA
+    const emailResponse = await fetch(`/api/sendButtonMail`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Error al enviar mail");
+    }
+    alert(
+      "Revisa tu email para seguir con el proceso de reestablecimiento de tu contraseña"
+    );
   } catch (error) {
     console.error(error.message);
     // Maneja el error de alguna manera, por ejemplo, mostrando un mensaje al usuario

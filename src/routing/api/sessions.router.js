@@ -70,7 +70,7 @@ sessionRouter.post(
   passport.authenticate("jwt", { failWithError: true }),
   async (req, res) => {
     try {
-      logger.info("user: " + req.user);
+      logger.info(req.user);
       return res.status(200).json({ status: "success" });
     } catch (error) {
       console.log(error.message);

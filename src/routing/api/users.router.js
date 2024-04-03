@@ -15,12 +15,7 @@ import { uploader } from "../../utils/multer.js";
 
 export const usersRouter = Router();
 
-usersRouter.post(
-  "/",
-  passport.authenticate("jwt", { failWithError: true }),
-  appendJwtAsCookie,
-  postUserController
-);
+usersRouter.post("/", postUserController);
 usersRouter.post(
   "/:uid/documents/:typeofdocument",
   uploader.single("file"),

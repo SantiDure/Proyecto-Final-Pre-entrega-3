@@ -57,11 +57,9 @@ export async function putUserController(req, res) {
       req.body.password = hashear(req.body.password);
     }
 
-    const updated = await userService.updateOneService(
-      { email: req.body.email },
-      { $set: req.body },
-      { new: true }
-    );
+    const updated = await userService.updateOneService(req.user._id, {
+      $set: req.body,
+    });
 
     if (!updated) {
       return res
@@ -127,9 +125,7 @@ export async function resetPasswordController(req, res) {
     const user = await userService.updateOneService(uid, {
       $set: { password: hashear(newPassword) },
     });
-    res
-      .status(200)
-      .json({ message: "Contraseña actualizada correctamente", newPassword });
+    res.status(200).json({ message: "Contraseña actualizada correctamente" });
   } catch (error) {
     console.error("Error al actualizar la contraseña:", error);
     res.status(500).json({ error: "Error al actualizar la contraseña" });

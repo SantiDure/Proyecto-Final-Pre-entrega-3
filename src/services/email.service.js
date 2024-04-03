@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { EMAIL_PASS, EMAIL_USER } from "../../config/config.js";
+import { EMAIL_PASS, EMAIL } from "../config/config.js";
 
 class GmailEmailService {
   constructor() {
@@ -16,10 +16,10 @@ class GmailEmailService {
 
   async send(destinatario, asunto, mensaje, adjuntos = []) {
     const emailOptions = {
-      from: EMAIL_USER,
+      from: EMAIL,
       to: destinatario,
       subject: asunto,
-      text: mensaje,
+      html: mensaje,
     };
 
     if (adjuntos.length > 0) {

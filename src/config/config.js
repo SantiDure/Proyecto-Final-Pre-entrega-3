@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-export const PORT = Number(process.env.PORT);
+export const PORT = Number(process.env.PORT) || 8080;
 
 export const MONGODB_CNX_STR = process.env.MONGODB_CNX_STR;
 export const COOKIE_OPTS = {
