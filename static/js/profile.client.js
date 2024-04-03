@@ -56,23 +56,26 @@ async function resetPassword(token) {
     });
     if (!response.ok) {
       throw new Error("Error al reestablecer la contraseña");
+    } else {
+      //DEBE ENVIAR UN MAIL, CON UN BOTON, QUE REDIRIJA A LA PAGINA PARA RESETAR LA CONTRASEÑA
+      try {
+        const emailResponse = await fetch(`/api/sendButtonMail`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (emailResponse.ok) {
+          alert(
+            "Revisa tu email para seguir con el proceso de reestablecimiento de tu contraseña"
+          );
+        }
+      } catch (error) {
+        console.log("Error relacionado a nodemailer", error.message);
+      }
     }
-
-    //DEBE ENVIAR UN MAIL, CON UN BOTON, QUE REDIRIJA A LA PAGINA PARA RESETAR LA CONTRASEÑA
-    const emailResponse = await fetch(`/api/sendButtonMail`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      throw new Error("Error al enviar mail");
-    }
-    alert(
-      "Revisa tu email para seguir con el proceso de reestablecimiento de tu contraseña"
-    );
   } catch (error) {
-    console.error(error.message);
+    console.log(error.message);
     // Maneja el error de alguna manera, por ejemplo, mostrando un mensaje al usuario
   }
 }
