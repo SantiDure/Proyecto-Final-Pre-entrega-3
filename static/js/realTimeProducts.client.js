@@ -1,4 +1,5 @@
-//////
+const socket = io();
+
 export async function getProducts() {
   const listaProductos = document.querySelector(".listaProductos");
   const response = await fetch("/api/products");
@@ -29,7 +30,6 @@ export async function getProducts() {
 const form = document.querySelector("form");
 const productList = document.querySelector(".listaProductos");
 
-const socket = io();
 getProducts();
 
 form?.addEventListener("submit", async (event) => {

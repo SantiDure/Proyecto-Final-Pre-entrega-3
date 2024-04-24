@@ -1,28 +1,13 @@
-import { COOKIE_SECRET, PORT } from "./config/config.js";
-import express, { Router } from "express";
-import handlebars from "express-handlebars";
-import { apiRouter } from "./routing/api/api.router.js";
-import { webRouter } from "./routing/web/web.router.js";
 import { Server } from "socket.io";
-import { connectDb } from "./dao/mongodb.js";
-import { productService } from "./dao/mongodb.js";
-import { sesiones } from "./middlewares/sesiones.js";
-import {
-  passportInitialize,
-  passportSession,
-} from "./middlewares/autenticaciones.js";
-import cookieParser from "cookie-parser";
-import { messagesDaoMongoose } from "./dao/message.dao.mongoose.js";
-import { logger } from "./utils/logger.js";
-import { transport } from "./utils/nodemailer.js";
 import { ServerToUp } from "./app/app.js";
-
+import { logger } from "./utils/logger.js";
+import { productService } from "./services/index.js";
+import { messagesDaoMongoose } from "./dao/message.dao.mongoose.js";
 const server = new ServerToUp();
 server.connect();
-await connectDb();
+await server.connectDb();
 
-//WEBSOCKET
-const websocketServer = new Server(server);
+const websocketServer = new Server(server.server);
 
 websocketServer.on("connection", async (socket) => {
   logger.info(socket.id);

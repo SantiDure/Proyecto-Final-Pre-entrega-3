@@ -1,8 +1,6 @@
 import { Schema, model } from "mongoose";
 import { randomUUID } from "node:crypto";
 import mongoosePaginate from "mongoose-paginate-v2";
-import { toPOJO } from "../utils/toPojo.js";
-import { userService } from "../services/index.js";
 const productSchema = new Schema(
   {
     _id: { type: String, default: randomUUID },

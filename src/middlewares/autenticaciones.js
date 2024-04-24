@@ -1,7 +1,7 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GithubStrategy } from "passport-github2";
-import { usersManager } from "../dao/user.dao.mongoose.js";
+import { UsersDaoMongoose } from "../dao/user.dao.mongoose.js";
 import {
   GITHUB_CLIENT_ID,
   GITHUB_CLIENT_SECRET,
@@ -77,7 +77,7 @@ passport.use(
     },
     async function verificationCallback(email, password, done) {
       try {
-        const datosUsuario = await usersManager.login(email, password);
+        const datosUsuario = await UsersDaoMongoose.login(email, password);
         done(null, datosUsuario);
       } catch (error) {
         done(error);

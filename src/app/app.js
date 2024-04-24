@@ -1,4 +1,4 @@
-import { COOKIE_SECRET, PORT } from "../config/config.js";
+import { COOKIE_SECRET, MONGODB_CNX_STR, PORT } from "../config/config.js";
 import express from "express";
 import handlebars from "express-handlebars";
 import { sesiones } from "../middlewares/sesiones.js";
@@ -10,10 +10,12 @@ import cookieParser from "cookie-parser";
 import { apiRouter } from "../routing/api/api.router.js";
 import mongoose from "mongoose";
 import { webRouter } from "../routing/web/web.router.js";
+import { logger } from "../utils/logger.js";
 export class ServerToUp {
-  #server;
+  server;
 
   constructor() {
+    this.port = PORT;
     this.app = express();
 
     this.app.get("/loggerTest", (req, res) => {
@@ -32,18 +34,18 @@ export class ServerToUp {
     this.app.engine("handlebars", handlebars.engine());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use("/", webRouter);
+    this.app.use("/api", apiRouter);
+    this.app.use("/static", express.static("./static"));
     this.app.use((err, req, res, next) => {
       console.error(err.stack);
       res.status(500).send("Something went wrong!");
     });
-    this.app.use("/api", apiRouter);
-    this.app.use("/static", express.static("./static"));
-    this.app.use("/", webRouter);
   }
 
-  connect(port = PORT) {
+  connect() {
     return new Promise((resolve, reject) => {
-      this.#server = this.app.listen(port, () => {
+      this.server = this.app.listen(this.port, () => {
         resolve(true);
       });
     });
@@ -51,18 +53,14 @@ export class ServerToUp {
 
   disconnect() {
     return new Promise((resolve, reject) => {
-      this.#server.close((err) => {
+      this.server.close((err) => {
         if (err) return reject(err);
         resolve(true);
       });
     });
   }
   async connectDb() {
-    try {
-      await mongoose.connect(MONGODB_CNX_STR, { socketTimeoutMS: 45_000 });
-      return logger.info(`DB conectada`);
-    } catch (error) {
-      logger.error(error.message);
-    }
+    await mongoose.connect(MONGODB_CNX_STR, { socketTimeoutMS: 45_000 });
+    return logger.info(`DB conectada`);
   }
 }

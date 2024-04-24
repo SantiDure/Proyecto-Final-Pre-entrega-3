@@ -4,6 +4,15 @@ import path from "path";
 import { fileURLToPath } from "url";
 import passport from "passport";
 
+export async function getUsersController(req, res) {
+  try {
+    const users = await userService.getUsersService();
+    return res.status(200).json({ status: "success", payload: users });
+  } catch (error) {
+    return res.status(500).json({ status: "error", message: error.message });
+  }
+}
+
 export async function postDocumentsController(req, res) {
   try {
     const __dirname = path.dirname(fileURLToPath(import.meta.url));

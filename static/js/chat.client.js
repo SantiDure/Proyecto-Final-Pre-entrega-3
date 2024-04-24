@@ -1,7 +1,6 @@
+const socket = io();
 const form = document.querySelector(".form__messages");
 const messagesContainer = document.querySelector(".messages__container");
-
-const socket = io();
 
 //Pedido de nombre al usuario
 const nombreUsuario = prompt("Escribe tu nombre");

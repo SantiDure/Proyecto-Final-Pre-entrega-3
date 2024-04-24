@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  onlyAdmin,
   onlyAdminAndPremium,
   onlySessionActive,
   onlyUser,
@@ -101,6 +102,13 @@ webRouter.get(
     });
   }
 );
+
+webRouter.get("/dashboard", onlyAdmin, (req, res) => {
+  res.render("dashboard.admin.handlebars", {
+    title: "Panel Admin",
+    ...req.user,
+  });
+});
 
 webRouter.get(
   "/resetpasswordform",

@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 import { randomUUID } from "node:crypto";
 import { hashCompare } from "../utils/criptograph.js";
 import { generateUniqueUsername } from "../utils/randomUserName.js";
-import { cartService, userService } from "../services/index.js";
 import { newError, ErrorType } from "../errors/errors.js";
+import { cartsManager } from "./cart.dao.mongoose.js";
 const collection = "users";
 const userSchema = new mongoose.Schema(
   {
@@ -24,47 +24,6 @@ const userSchema = new mongoose.Schema(
   {
     strict: "throw",
     versionKey: false,
-    statics: {
-      login: async function (email, password) {
-        let datosUsuario;
-
-        if (email === "admin@coder.com" && password === "admin") {
-          datosUsuario = {
-            email: "admin",
-            first_name: "admin",
-            last_name: "admin",
-            rol: "admin",
-          };
-        } else {
-          let user = await mongoose.model(collection).findOne({ email }).lean();
-          const userUpdated = await userService.updateOneService(user._id, {
-            $set: { last_connection: Date(Date.now).toLocaleString() },
-          });
-          user = userUpdated;
-
-          if (!user) {
-            throw newError(ErrorType.BAD_REQUEST, "login failed");
-          }
-
-          if (!hashCompare(password, user["password"])) {
-            throw newError(ErrorType.UNAUTHORIZED, "login failed");
-          }
-          datosUsuario = {
-            _id: user["_id"],
-            email: user["email"],
-            first_name: user["first_name"],
-            last_name: user["last_name"],
-            password: user["password"],
-            age: user["age"],
-            cart: user["cart"],
-            documents: user["documents"],
-            last_connection: user["last_connection"],
-            rol: user["rol"],
-          };
-        }
-        return datosUsuario;
-      },
-    },
   }
 );
 
@@ -72,7 +31,7 @@ export const usersManager = mongoose.model(collection, userSchema);
 
 export class UsersDaoMongoose {
   async create(data) {
-    const cartToNewUser = await cartService.createCartService();
+    const cartToNewUser = cartsManager.create();
     data.cart = cartToNewUser;
     const user = await usersManager.create(data);
 
@@ -92,5 +51,30 @@ export class UsersDaoMongoose {
 
   async deleteOne(id) {
     return await usersManager.findOneAndDelete({ _id: id }).lean();
+  }
+
+  static async login(email, password) {
+    let datosUsuario;
+    let user = await usersManager.findOne({ email }).lean();
+
+    if (!user) {
+      throw newError(ErrorType.BAD_REQUEST, "login failed");
+    }
+    if (!hashCompare(password, user.password)) {
+      throw newError(ErrorType.UNAUTHORIZED, "login failed");
+    }
+    datosUsuario = {
+      _id: user._id,
+      email: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      password: user.password,
+      age: user.age,
+      cart: user.cart,
+      documents: user.documents,
+      last_connection: user.last_connection,
+      rol: user.rol,
+    };
+    return datosUsuario;
   }
 }

@@ -1,5 +1,6 @@
 import { productService } from "../services/index.js";
 import { productsManager } from "../dao/product.dao.mongoose.js";
+import { gmailEmailService } from "../services/email.service.js";
 export async function getProductController(req, res) {
   const options = {
     page: req.query.page || 1,
@@ -75,8 +76,15 @@ export async function deleteProductController(req, res) {
   const { id } = req.params;
   try {
     const product = await productService.deleteOneService(id);
-    res.status(200).json(product);
+    if (product.owner !== "admin") {
+      await gmailEmailService.send(
+        product.owner,
+        "Producto eliminado",
+        `Se eliminó el producto "${product.title}"`
+      );
+    }
+    return res.status(200).json(product);
   } catch (error) {
-    res.status(404).send({ message: error.message });
+    return res.status(404).send({ message: error.message });
   }
 }

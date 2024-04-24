@@ -6,7 +6,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "node src/main.js",
-    "dev": "nodemon -e --env-file=.env js,handlebars,html,yaml .",
+    "dev": "nodemon -e --env-file=.env js,handlebars,html .",
     "test": "mocha --recursive",
     "test:watch": "nodemon --exec mocha --recursive"
   },

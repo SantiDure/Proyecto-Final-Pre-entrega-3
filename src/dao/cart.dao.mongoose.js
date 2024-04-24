@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose";
 import { randomUUID } from "node:crypto";
-import { productService } from "../services/index.js";
 import { ErrorType, newError } from "../errors/errors.js";
 import { logger } from "../utils/logger.js";
+import { productsManager } from "./product.dao.mongoose.js";
 const cartSchema = new Schema(
   {
     _id: { type: String, default: randomUUID },
@@ -22,7 +22,9 @@ const cartSchema = new Schema(
 
         const cart = await model("carts", cartSchema).findById(cid);
 
-        const product = await productService.getProductByIdService(pid);
+        const product = await productsManager.findById({
+          _id: pid,
+        });
 
         const productIndexFind = cart.products.findIndex(
           (p) => p._id === product._id
@@ -52,7 +54,7 @@ const cartSchema = new Schema(
         try {
           const cart = await model("carts", cartSchema).findById(cid);
 
-          const product = await productService.getProductByIdService({
+          const product = await productsManager.findById({
             _id: pid,
           });
 

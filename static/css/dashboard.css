@@ -1,0 +1,9 @@
+.users{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card{
+    width: 18rem;
+    margin: 10px
+}

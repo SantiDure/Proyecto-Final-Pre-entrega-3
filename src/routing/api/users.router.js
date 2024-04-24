@@ -7,21 +7,21 @@ import {
   changeRolUserAndPremiumController,
   resetPasswordController,
   postDocumentsController,
+  getUsersController,
 } from "../../controllers/user.controller.js";
-import passport from "passport";
-import { appendJwtAsCookie } from "../../middlewares/autenticaciones.js";
 import { extractTokenFromCookie } from "../../middlewares/cookies.js";
 import { uploader } from "../../utils/multer.js";
+import { onlyAdmin } from "../../middlewares/autorizaciones.js";
 
 export const usersRouter = Router();
-
+usersRouter.get("/", onlyAdmin, getUsersController);
+usersRouter.get("/current", getUserController);
 usersRouter.post("/", postUserController);
 usersRouter.post(
   "/:uid/documents/:typeofdocument",
   uploader.single("file"),
   postDocumentsController
 );
-usersRouter.get("/current", getUserController);
 usersRouter.put("/", putUserController);
 usersRouter.put(
   "/resetpassword/:uid",
