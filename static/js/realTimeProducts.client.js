@@ -45,7 +45,7 @@ form?.addEventListener("submit", async (event) => {
   //obteniendo el owner
   const user = await fetch("/api/users/current");
   const userJson = await user.json();
-  const ownerId = userJson.email;
+  const ownerId = userJson.payload.email;
   console.log(userJson);
   // Validations
   if (
@@ -55,11 +55,12 @@ form?.addEventListener("submit", async (event) => {
     !price ||
     !stock ||
     !category ||
-    !thumbnail
+    !thumbnail ||
+    !ownerId
   ) {
     Swal.fire({
       title: "Error!",
-      text: "Todos los campos son obligatorios",
+      text: "Datos Invalidos",
       icon: "error",
       confirmButtonText: "Ok",
     });
@@ -118,14 +119,14 @@ socket.on("getProducts", async () => {
           const user = await fetch("/api/users/current");
           const userJson = await user.json();
 
-          switch (userJson.rol) {
+          switch (userJson.payload.rol) {
             case "admin":
               if (productID) {
                 socket.emit("deleteProduct", productID);
               }
               break;
             case "premium":
-              if (product.owner !== userJson.email) {
+              if (product.owner !== userJson.payload.email) {
                 alert("Solo puedes eliminar productos que tú creaste");
               } else {
                 if (productID) {

@@ -31,17 +31,17 @@ export const usersManager = mongoose.model(collection, userSchema);
 
 export class UsersDaoMongoose {
   async create(data) {
-    const cartToNewUser = cartsManager.create();
-    data.cart = cartToNewUser;
-    const user = await usersManager.create(data);
+    const user = (await usersManager.create(data)).toObject();
 
-    return user.toObject();
+    return user;
   }
   async readOne(query) {
     return await usersManager.findOne(query).lean();
   }
   async readMany(query) {
-    return await usersManager.find(query).lean();
+    const users = await usersManager.find(query).lean();
+
+    return users;
   }
   async updateOne(id, query) {
     return await usersManager
@@ -50,11 +50,23 @@ export class UsersDaoMongoose {
   }
 
   async deleteOne(id) {
-    return await usersManager.findOneAndDelete({ _id: id }).lean();
+    const userToDelete = await usersManager
+      .findOneAndDelete({ _id: id })
+      .lean();
+    return userToDelete;
+  }
+
+  async deleteInactive(query) {
+    const inactiveUsers = await usersManager.deleteMany(query);
+    return inactiveUsers;
   }
 
   static async login(email, password) {
     let datosUsuario;
+    await usersManager.findOneAndUpdate(
+      { email },
+      { $set: { last_connection: new Date(Date.now()) } }
+    );
     let user = await usersManager.findOne({ email }).lean();
 
     if (!user) {
@@ -63,7 +75,7 @@ export class UsersDaoMongoose {
     if (!hashCompare(password, user.password)) {
       throw newError(ErrorType.UNAUTHORIZED, "login failed");
     }
-    datosUsuario = {
+    const userWithLastConnection = (datosUsuario = {
       _id: user._id,
       email: user.email,
       first_name: user.first_name,
@@ -74,7 +86,7 @@ export class UsersDaoMongoose {
       documents: user.documents,
       last_connection: user.last_connection,
       rol: user.rol,
-    };
+    });
     return datosUsuario;
   }
 }

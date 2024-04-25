@@ -1,15 +1,68 @@
 const usersContainer = document.querySelector(".users");
+const btnDeleteInactive = document.querySelector("#btn__delte_inactive");
 
 async function getUsers() {
-  const response = await fetch("/api/users");
-  const users = await response.json();
-  if (!response.ok) {
-    alert("ocurrió un error al buscar usuarios");
+  try {
+    const response = await fetch("/api/users");
+    if (!response.ok) {
+      throw new Error("Ocurrió un error al buscar usuarios");
+    }
+    const users = await response.json();
+    users.payload.forEach((user) => {
+      const card = createUserCard(user);
+      usersContainer.appendChild(card);
+    });
+    // Ahora agregamos el event listener después de agregar todos los usuarios
+    const btnsDeleteUser = document.querySelectorAll(".delete-user");
+    btnsDeleteUser.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const userId = btn.getAttribute("data-user-id");
+        deleteUser(userId);
+      });
+    });
+
+    const btnsChangeUserRole = document.querySelectorAll(".change-role");
+    btnsChangeUserRole.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const userId = btn.getAttribute("data-user-id");
+        changeUserRole(userId);
+      });
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Ocurrió un error al buscar usuarios");
   }
-  users.payload.forEach((user) => {
-    const card = createUserCard(user);
-    usersContainer.appendChild(card);
-  });
+}
+async function changeUserRole(userId) {
+  try {
+    const response = await fetch(`/api/users/premium/${userId}`, {
+      method: "PUT",
+    });
+    if (response.ok) {
+      alert("El cambio de rol fue exitoso");
+      location.reload(); // Recarga la página
+    } else {
+      throw new Error("Hubo un problema al cambiar el rol del usuario");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function deleteUser(userId) {
+  try {
+    const response = await fetch(`/api/users/${userId}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      alert("La eliminación fue exitosa");
+      location.reload(); // Recarga la página
+    } else {
+      throw new Error("Hubo un problema al eliminar el usuario");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
 
 function createUserCard(user) {
@@ -33,18 +86,54 @@ function createUserCard(user) {
   rol.classList.add("card-text");
   rol.innerText = user.rol;
   divContainer.appendChild(rol);
-  //botones
+
+  const last_connection = document.createElement("p");
+  last_connection.classList.add("card-text");
+  last_connection.innerText = user.last_connection;
+  divContainer.appendChild(last_connection);
+
+  // Botón de eliminar
+  const btnDeleteUser = document.createElement("button");
+  btnDeleteUser.classList.add("btn");
+  btnDeleteUser.classList.add("btn-danger");
+  btnDeleteUser.classList.add("user__button");
+  btnDeleteUser.classList.add("delete-user");
+  btnDeleteUser.setAttribute("data-user-id", user._id);
+  btnDeleteUser.innerText = "Eliminar";
+  divContainer.appendChild(btnDeleteUser);
+  // Botón para cambiar el rol
+  const btnChangeRol = document.createElement("button");
+  btnChangeRol.classList.add("btn");
+  btnChangeRol.classList.add("btn-primary");
+  btnChangeRol.classList.add("user__button");
+  btnChangeRol.classList.add("change-role");
+  btnChangeRol.setAttribute("data-user-id", user._id);
+  btnChangeRol.innerText = "Cambiar rol";
+  divContainer.appendChild(btnChangeRol);
 
   divCard.appendChild(divContainer);
 
   return divCard;
 }
 
+btnDeleteInactive.addEventListener("click", async () => {
+  try {
+    const response = await fetch(`/api/users`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      alert(
+        "Los usuarios con al menos 2 días de inactividad han sido eliminados"
+      );
+      location.reload();
+    } else if (response.status == 404) {
+      alert("No se encontraron usuarios para eliminar");
+    } else {
+      alert("ocurrio un error");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+});
+
 getUsers();
-/*<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div> */

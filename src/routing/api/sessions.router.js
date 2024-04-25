@@ -57,7 +57,7 @@ sessionRouter.get(
 
 sessionRouter.delete("/current", removeJwtFromCookies, async (req, res) => {
   await userService.updateOneService(req.user._id, {
-    $set: { last_connection: Date(Date.now).toLocaleString() },
+    $set: { last_connection: Date(Date.now) },
   });
   req.session.destroy((err) => {
     res.status(204).json({ message: "logout success" });

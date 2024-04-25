@@ -90,12 +90,15 @@ cartSchema.pre("find", function (next) {
 export const cartsManager = model("carts", cartSchema);
 
 export class CartDaoMongoose {
-  async create(data) {
-    const cart = await cartsManager.create(data);
+  async create() {
+    const cart = await cartsManager.create({});
+    console.log(cart);
     return cart;
   }
   async readOne(id) {
-    const cart = await cartsManager.findOne({ _id: id });
+    const cart = await cartsManager
+      .findOne({ _id: id })
+      .populate("products._id");
     return cart;
   }
   async readMany(query) {

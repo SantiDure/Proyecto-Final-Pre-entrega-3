@@ -7,7 +7,7 @@ const ticketSchema = new Schema(
     purchase_datetime: {
       type: String,
       default: () => {
-        return new Date().toLocaleString();
+        return new Date(Date.now());
       },
     },
     amount: { type: Number, default: 0 },

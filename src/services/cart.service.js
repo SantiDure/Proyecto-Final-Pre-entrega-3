@@ -3,8 +3,8 @@ export class CartRepository {
     this.dao = dao;
   }
 
-  async createCartService(data) {
-    const cart = await this.dao.create(data);
+  async createCartService() {
+    const cart = await this.dao.create();
     return cart;
   }
 
@@ -14,6 +14,7 @@ export class CartRepository {
 
   async getCartByIdService(id) {
     const cartForId = await this.dao.readOne(id);
+    console.log(cartForId);
     return cartForId;
   }
 

@@ -23,4 +23,8 @@ export class UserRepository {
   async deleteOneService(id) {
     return this.dao.deleteOne(id);
   }
+
+  async deleteInactiveService(query) {
+    return this.dao.deleteInactive(query);
+  }
 }

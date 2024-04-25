@@ -80,9 +80,7 @@ export async function getCartsController(req, res) {
 export async function getCartByIdController(req, res) {
   const { cid } = req.params;
   try {
-    const cartForId = await cartService
-      .getCartByIdService({ _id: cid })
-      .populate("products._id");
+    const cartForId = await cartService.getCartByIdService({ _id: cid });
 
     return res.status(200).json({ cartForId });
   } catch (error) {
@@ -111,8 +109,8 @@ export async function postAddProductToCartController(req, res) {
 
 export async function postCartController(req, res) {
   try {
-    const cart = await cartService.createCartService(req.body);
-    res.status(201).json(cart);
+    const cart = await cartService.createCartService();
+    res.status(201).json({ payload: cart });
   } catch (error) {
     res.status(400).send({ message: error.message });
   }
