@@ -11,8 +11,9 @@ import {
   deleteManyCartController,
 } from "../../controllers/carts.controller.js";
 import { Router } from "express";
+import { onlyUserAndPremium } from "../../middlewares/autorizaciones.js";
 export const cartRouter = Router();
-cartRouter.get("/:cid", getCartByIdController);
+cartRouter.get("/:cid", onlyUserAndPremium, getCartByIdController);
 cartRouter.get("/", getCartsController);
 cartRouter.get("/:cid/purchase", getTicketController);
 cartRouter.post("/", postCartController);

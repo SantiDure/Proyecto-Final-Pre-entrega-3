@@ -20,7 +20,7 @@ export const ticketsManager = model("tickets", ticketSchema);
 
 export class TicketDaoMongoose {
   async create(data) {
-    const ticket = await ticketsManager.create(data);
+    const ticket = (await ticketsManager.create(data)).toObject();
     return ticket;
   }
   async readOne(id) {

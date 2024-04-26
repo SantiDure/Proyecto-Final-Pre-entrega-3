@@ -76,11 +76,11 @@ export async function deleteProductController(req, res) {
   const { id } = req.params;
   try {
     const product = await productService.deleteOneService(id);
-    if (product.owner !== "admin") {
+    if (product.owner) {
       await gmailEmailService.send(
         product.owner,
         "Producto eliminado",
-        `Se eliminó el producto "${product.title}"`
+        `Se eliminó tu producto "${product.title}"`
       );
     }
     return res.status(200).json(product);

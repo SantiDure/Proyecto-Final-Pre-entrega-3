@@ -1,11 +1,15 @@
-{{#if productsInCart}} 
-<ul>  
-    <h1>TU CARRITO:</h1>
-  {{#each products}}
-  <li>{{products}}</li>
-
-  {{/each}}
-</ul>
+<h1>Bienvenido a tu carrito</h1>
+{{#if productsInCart}}
+<div id="productsAdded">
+    
+</div>
+<button id="btn_buy" class="btn btn-primary">Terminar compra</button>
 {{else}}
-nada para mostrar...<br>
+<div class="card">
+    <div class="card-body">
+        <p class="card-title">No hay productos en el carrito</p>
+    </div>
+</div>
 {{/if}}
+<script src="/static/js/cart.client.js"></script>
+   

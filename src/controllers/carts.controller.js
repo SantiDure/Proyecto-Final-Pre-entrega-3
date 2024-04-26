@@ -14,23 +14,23 @@ export async function getTicketController(req, res) {
 
     // Array para almacenar los IDs de los productos que no se pudieron comprar
     let outOfStockProducts = [];
-
+    console.log(cart.products[0]._id);
     // Añade la cantidad y los productos a productList y comprueba el stock
     await Promise.all(
       cart.products.map(async (product) => {
         const productsFounded = await productService.getProductByIdService(
-          product._id
+          product._id._id
         );
-        if (productsFounded.stock >= product.quantity) {
+        if (productsFounded.stock >= product._id.quantity) {
           // Si hay suficiente stock, resta la cantidad comprada al stock del producto
-          await productService.updateOneService(product._id, {
-            stock: productsFounded.stock - product.quantity,
+          await productService.updateOneService(product._id._id, {
+            stock: productsFounded._id.stock - product._id.quantity,
           });
-          productsFounded.quantity = product.quantity;
+          productsFounded._id.quantity = product._id.quantity;
           productList.push(productsFounded);
         } else {
           // Si no hay suficiente stock, agrega el ID del producto al array de productos sin stock
-          outOfStockProducts.push(product._id);
+          outOfStockProducts.push(product._id._id);
         }
       })
     );
@@ -39,7 +39,7 @@ export async function getTicketController(req, res) {
     const newCart = {
       ...cart,
       products: cart.products.filter((product) =>
-        outOfStockProducts.includes(product._id)
+        outOfStockProducts.includes(product._id._id)
       ),
     };
 
@@ -57,7 +57,7 @@ export async function getTicketController(req, res) {
       purchaser: user[0].email,
     });
     // Retorna el ticket generado y el array de IDs de productos sin stock
-    res.status(200).send({ ticket, outOfStockProducts });
+    res.status(200).json({ status: "success", ticket, outOfStockProducts });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -81,7 +81,6 @@ export async function getCartByIdController(req, res) {
   const { cid } = req.params;
   try {
     const cartForId = await cartService.getCartByIdService({ _id: cid });
-
     return res.status(200).json({ cartForId });
   } catch (error) {
     res.status(404).send({ message: error.message });

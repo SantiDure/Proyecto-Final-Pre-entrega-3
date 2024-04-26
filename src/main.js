@@ -3,6 +3,7 @@ import { ServerToUp } from "./app/app.js";
 import { logger } from "./utils/logger.js";
 import { productService } from "./services/index.js";
 import { messagesDaoMongoose } from "./dao/message.dao.mongoose.js";
+import { gmailEmailService } from "./services/email.service.js";
 const server = new ServerToUp();
 server.connect();
 await server.connectDb();
@@ -44,12 +45,22 @@ websocketServer.on("connection", async (socket) => {
   });
   //delete
   socket.on("deleteProduct", async (productID) => {
-    await productService.deleteOneService(productID);
+    const product = await productService.getProductByIdService(productID);
+    if (product) {
+      if (product.owner !== "admin") {
+        await gmailEmailService.send(
+          product.owner,
+          "Producto eliminado",
+          `Se eliminó tu producto "${product.title}"`
+        );
+      }
 
-    websocketServer.emit(
-      "getProducts",
-      await productService.getProductsService({})
-    );
+      await productService.deleteOneService(productID);
+      websocketServer.emit(
+        "getProducts",
+        await productService.getProductsService({})
+      );
+    }
   });
 
   //getMessage

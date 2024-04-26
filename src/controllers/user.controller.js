@@ -3,10 +3,11 @@ import { hashear } from "../utils/criptograph.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import passport from "passport";
+import { gmailEmailService } from "../services/email.service.js";
 
 export async function getUsersController(req, res) {
   try {
-    const users = await userService.getUsersService();
+    const users = await userService.getUsersService({});
     return res.status(200).json({ status: "success", payload: users });
   } catch (error) {
     return res.status(500).json({ status: "error", message: error.message });
@@ -84,24 +85,33 @@ export async function putUserController(req, res) {
 export async function deleteInactiveController(req, res) {
   try {
     // dos días
-    const twoDaysAgo = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000);
+    const twoDaysAgo = new Date(Date.now() - 2 * 60 * 1000);
     // Elimina los usuarios que no se han actualizado en los últimos dos días
+    // 2 * 24 * 60 * 60 * 1000
+    const usersToSendMail = await userService.getUsersService({
+      last_connection: { $lt: twoDaysAgo },
+    });
+    usersToSendMail.map(async (user) => {
+      await gmailEmailService.send(
+        user.email,
+        "Vuelve pronto!",
+        "Tu cuenta fue eliminada de nuestra tienda, por estar mucho tiempo inactiva, esperamos que vuelvas pronto!"
+      );
+    });
     const result = await userService.deleteInactiveService({
       last_connection: { $lt: twoDaysAgo },
     });
-    console.log(twoDaysAgo);
-    console.log("Resultado de la eliminación:", result);
-
     if (result.deletedCount === 0) {
       return res.status(404).json({
         status: "error",
         message: "No se encontraron usuarios inactivos",
       });
     }
-
     return res.status(200).json({
       status: "success",
-      message: `Se eliminaron ${result.deletedCount} usuarios inactivos`,
+      message: `Se eliminaron
+       ${result.deletedCount}
+       usuarios inactivos`,
     });
   } catch (error) {
     return res.status(500).json({ status: "error", message: error.message });

@@ -5,8 +5,9 @@
 <p>Correo electronico: {{email}}</p>
 <p>Rol: {{rol}}</p>
 <p>Última conexión: {{last_connection}}</p>
-<button onclick="resetPassword('{{token}}')">reestablecer contraseña</button>
+<button class="btn btn-primary" onclick="resetPassword('{{token}}')">reestablecer contraseña</button>
+<a class="btn btn-primary" href="/carts/{{cart._id}}">Ver mi carrito</a>
 <form class="logoutform">
-  <button src="btn btn-danger" type="submit">Logout!</button>
+  <button class="btn btn-danger" src="btn btn-danger" type="submit">Logout!</button>
 </form>
 <script src="/static/js/profile.client.js"></script>

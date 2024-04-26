@@ -88,7 +88,7 @@ webRouter.get(
 webRouter.get(
   "/carts/:cid",
   onlySessionActive,
-  onlyUser,
+  onlyUserAndPremium,
   async (req, res, next) => {
     const { cid } = req.params;
     const result = await cartService.getCartByIdService({ _id: cid });

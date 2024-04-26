@@ -7,8 +7,8 @@ export class UserRepository {
     return user;
   }
 
-  async getUsersService() {
-    return await this.dao.readMany({});
+  async getUsersService(query) {
+    return await this.dao.readMany(query);
   }
 
   async getUserByIdService(query) {
