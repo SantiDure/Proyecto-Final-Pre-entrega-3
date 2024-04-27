@@ -73,7 +73,7 @@ sessionRouter.post(
       logger.info(req.user);
       return res.status(200).json({ status: "success" });
     } catch (error) {
-      logger.error(error.message);
+      logger.info(error.message);
       return res.status(500).json({ error: error.message });
     }
   }

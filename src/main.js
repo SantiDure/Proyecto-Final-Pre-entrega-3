@@ -1,6 +1,5 @@
 import { Server } from "socket.io";
 import { ServerToUp } from "./app/app.js";
-import { logger } from "./utils/logger.js";
 import { productService } from "./services/index.js";
 import { messagesDaoMongoose } from "./dao/message.dao.mongoose.js";
 import { gmailEmailService } from "./services/email.service.js";
@@ -11,7 +10,6 @@ await server.connectDb();
 const websocketServer = new Server(server.server);
 
 websocketServer.on("connection", async (socket) => {
-  logger.info(socket.id);
   //getProducts
   socket.emit("getProducts", await productService.getProductsService({}));
 
@@ -40,9 +38,7 @@ websocketServer.on("connection", async (socket) => {
       );
     }
   );
-  socket.on("disconnecting", () => {
-    logger.info(socket.id + " se fue");
-  });
+  socket.on("disconnecting", () => {});
   //delete
   socket.on("deleteProduct", async (productID) => {
     const product = await productService.getProductByIdService(productID);

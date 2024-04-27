@@ -1,4 +1,6 @@
+import { EMAIL } from "../config/config.js";
 import { cartsManager } from "../dao/cart.dao.mongoose.js";
+import { gmailEmailService } from "../services/email.service.js";
 import { cartService, ticketService, userService } from "../services/index.js";
 import { productService } from "../services/index.js";
 
@@ -6,7 +8,8 @@ export async function getTicketController(req, res) {
   const { cid } = req.params;
   try {
     // Obtiene el carrito y el usuario correspondiente a ese carrito
-    const cart = await cartService.getCartByIdService({ _id: cid });
+    const cart = await cartService.getCartByIdService(cid);
+    console.log("REQ.USER.EMAL" + req.user.email);
 
     // Crea una lista de productos, la rellena y lo muestra por consola
     let productList = [];
@@ -57,6 +60,15 @@ export async function getTicketController(req, res) {
     // Retorna el ticket generado y el array de IDs de productos sin stock
     const emptyCart = [];
     await cartService.updateOneService(cid, { products: emptyCart });
+
+    //Me envio a mi mismo el ticket de compra, para poder preparar el pedido y enviarlo
+    // await gmailEmailService.send(EMAIL, "Nueva compra", ticket);
+    //Envio un mail al comprador, como confirmacion de la compra
+    // await gmailEmailService.send(
+    //   req.user.email,
+    //   "Compra confirmada",
+    //   "¡Gracias por tu compra, te avisaremos en cuanto el pedido sea despachado!"
+    // );
     res.status(200).json({ status: "success", ticket, outOfStockProducts });
   } catch (error) {
     res.status(500).json({ message: error.message });

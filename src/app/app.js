@@ -39,7 +39,7 @@ export class ServerToUp {
     this.app.use("/static", express.static("./static"));
     this.app.use((err, req, res, next) => {
       console.error(err.stack);
-      res.status(500).send("Something went wrong!");
+      res.status(500).send(err.stack);
     });
   }
 

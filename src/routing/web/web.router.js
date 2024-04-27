@@ -8,7 +8,6 @@ import {
 } from "../../middlewares/autorizaciones.js";
 import { productsManager } from "../../dao/product.dao.mongoose.js";
 import { cartService } from "../../services/index.js";
-import { logger } from "../../utils/logger.js";
 import passport from "passport";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express";
@@ -92,7 +91,6 @@ webRouter.get(
     const { cid } = req.params;
     const result = await cartService.getCartByIdService({ _id: cid });
     let productList = result;
-    logger.info(productList.products);
     // result.products;
     res.render("cart.handlebars", {
       title: "cart",
@@ -113,6 +111,7 @@ webRouter.get(
   "/resetpasswordform",
   passport.authenticate("jwt", { failWithError: true }),
   (req, res) => {
+    console.log(JSON.stringify(req.user, null, 2));
     res.render("resetpasswordform.handlebars", {
       title: "reestablecer contraseña",
       ...req.user,

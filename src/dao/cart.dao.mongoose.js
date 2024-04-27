@@ -74,7 +74,7 @@ const cartSchema = new Schema(
             );
           }
         } catch (error) {
-          logger.info(error);
+          console.log(error);
         }
       },
       updateProductQuantityOnCart: async function (cid, pid) {},
@@ -92,7 +92,7 @@ export const cartsManager = model("carts", cartSchema);
 export class CartDaoMongoose {
   async create() {
     const cart = await cartsManager.create({});
-    logger.info(cart);
+
     return cart;
   }
   async readOne(id) {

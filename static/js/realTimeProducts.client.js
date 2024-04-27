@@ -1,5 +1,3 @@
-import { logger } from "../../src/utils/logger";
-
 const socket = io();
 
 export async function getProducts() {
@@ -143,7 +141,7 @@ socket.on("getProducts", async () => {
       });
     }
   } catch (error) {
-    logger.error(error.message);
+    console.error(error.message);
     listaProductos.innerHTML = `<div>Error al obtener productos. Por favor, inténtalo de nuevo más tarde.</div>`;
   }
 });
