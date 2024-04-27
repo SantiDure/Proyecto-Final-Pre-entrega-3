@@ -3,6 +3,7 @@ import { Schema } from "mongoose";
 import { model } from "mongoose";
 const ticketSchema = new Schema(
   {
+    _id: { type: String, default: randomUUID },
     code: { type: String, default: randomUUID },
     purchase_datetime: {
       type: String,

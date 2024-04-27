@@ -16,7 +16,6 @@ async function getCart() {
     alert("error");
   } else {
     const products = result.cartForId.products;
-    console.log(products);
 
     products.map((product) => {
       const divCardProduct = document.createElement("div");
@@ -50,25 +49,28 @@ async function getCart() {
           }
         );
         if (response.status === 200) {
-          console.log("producto quitado del carrito");
+          alert("producto quitado del carrito");
           location.reload();
         }
-        console.log(idCart, product._id._id);
       });
       divContainer.appendChild(deleteButton);
       divCardProduct.appendChild(divContainer);
 
       cartContainer.appendChild(divCardProduct);
+    });
 
-      btnBuy.addEventListener("click", async () => {
-        const response = await fetch(`/api/carts/${idCart}/purchase`);
-        const result = await response.json();
-        if (!response.ok) {
-          alert("error al generar el ticket");
-        }
-        //esto debe enviarse por mail al admin
-        alert(JSON.stringify(result.ticket));
-      });
+    btnBuy?.addEventListener("click", async () => {
+      const response = await fetch(`/api/carts/${idCart}/purchase`);
+      const result = await response.json();
+      if (!response.ok) {
+        alert("error al generar el ticket");
+      }
+      //esto debe enviarse por mail al admin
+      alert(
+        "Finalizaste tu compra, aqui tienes el identificador de tu ticket de compra, guardalo o tomale una foto"
+      );
+      alert(result.ticket._id);
+      location.reload();
     });
   }
 }

@@ -7,14 +7,12 @@ export async function getTicketController(req, res) {
   try {
     // Obtiene el carrito y el usuario correspondiente a ese carrito
     const cart = await cartService.getCartByIdService({ _id: cid });
-    const user = await userService.getUsersService({ cart: cid });
 
     // Crea una lista de productos, la rellena y lo muestra por consola
     let productList = [];
 
     // Array para almacenar los IDs de los productos que no se pudieron comprar
     let outOfStockProducts = [];
-    console.log(cart.products[0]._id);
     // Añade la cantidad y los productos a productList y comprueba el stock
     await Promise.all(
       cart.products.map(async (product) => {
@@ -54,9 +52,11 @@ export async function getTicketController(req, res) {
     // Instancia el ticket
     const ticket = await ticketService.createTicketService({
       amount: total,
-      purchaser: user[0].email,
+      purchaser: req.user.email,
     });
     // Retorna el ticket generado y el array de IDs de productos sin stock
+    const emptyCart = [];
+    await cartService.updateOneService(cid, { products: emptyCart });
     res.status(200).json({ status: "success", ticket, outOfStockProducts });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -91,9 +91,9 @@ export async function postAddProductToCartController(req, res) {
   const { cid, pid } = req.params;
   try {
     const userEmail = req.user.email;
-    console.log(`email del usuario: ${userEmail}`);
+
     const product = await productService.getProductByIdService(pid);
-    console.log(`owner del producto: ${product.owner}`);
+
     const productOwner = await product.owner;
     if (userEmail !== productOwner) {
       await cartsManager.addProductToCart(cid, pid);

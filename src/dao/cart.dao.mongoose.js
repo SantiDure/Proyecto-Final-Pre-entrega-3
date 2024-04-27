@@ -92,7 +92,7 @@ export const cartsManager = model("carts", cartSchema);
 export class CartDaoMongoose {
   async create() {
     const cart = await cartsManager.create({});
-    console.log(cart);
+    logger.info(cart);
     return cart;
   }
   async readOne(id) {

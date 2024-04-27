@@ -1,3 +1,5 @@
+import { logger } from "../../src/utils/logger";
+
 const socket = io();
 
 export async function getProducts() {
@@ -6,7 +8,6 @@ export async function getProducts() {
   const products = await response.json();
 
   if (products[0]) {
-    console.log(products.payload);
     listaProductos.innerHTML = "";
     products.map((product) => {
       let divProduct = document.createElement("div");
@@ -46,7 +47,7 @@ form?.addEventListener("submit", async (event) => {
   const user = await fetch("/api/users/current");
   const userJson = await user.json();
   const ownerId = userJson.payload.email;
-  console.log(userJson);
+
   // Validations
   if (
     !title ||
@@ -95,7 +96,7 @@ socket.on("getProducts", async () => {
     }
 
     const products = await response.json();
-    console.log(products);
+
     if (products) {
       products.payload.forEach((product) => {
         let divProduct = document.createElement("div");
@@ -142,7 +143,7 @@ socket.on("getProducts", async () => {
       });
     }
   } catch (error) {
-    console.log({ message: error.message });
+    logger.error(error.message);
     listaProductos.innerHTML = `<div>Error al obtener productos. Por favor, inténtalo de nuevo más tarde.</div>`;
   }
 });

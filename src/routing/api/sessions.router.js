@@ -30,7 +30,7 @@ sessionRouter.get(
   "/current",
   passport.authenticate("jwt", { failWithError: true }),
   function (req, res) {
-    console.log(req.user);
+    logger.info(req.user);
     return res.status(200).json(new userDTO(req.user));
   }
 );
@@ -73,7 +73,7 @@ sessionRouter.post(
       logger.info(req.user);
       return res.status(200).json({ status: "success" });
     } catch (error) {
-      console.log(error.message);
+      logger.error(error.message);
       return res.status(500).json({ error: error.message });
     }
   }

@@ -14,7 +14,7 @@ export class CartRepository {
 
   async getCartByIdService(id) {
     const cartForId = await this.dao.readOne(id);
-    console.log(cartForId);
+
     return cartForId;
   }
 
